@@ -3,11 +3,11 @@
 ____
 
 
-## Как запустить проект:
+## Ссылка на проект: https://www.figma.com/file/k47Yd0WguEtD28ljBckGPQ/Diploma-(Copy)?node-id=932%3A3886&t=zzNymkxN7d0bdg5I-0
 
 ____
 
-### `npm start`
+### Как запустить проект: `npm start`
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
