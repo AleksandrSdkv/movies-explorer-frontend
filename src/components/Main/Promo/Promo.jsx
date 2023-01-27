@@ -5,11 +5,11 @@ import NavTab from '../NavTab/NavTab';
 function Promo() {
     return (
 
-        <section className="Promo">
+        <article className="Promo">
             <div className='Promo_backgraund'></div>
             <h1 className="Promo__title">Учебный проект студента факультета Веб-разработки.</h1>
             <NavTab />
-        </section>
+        </article>
     )
 }
 

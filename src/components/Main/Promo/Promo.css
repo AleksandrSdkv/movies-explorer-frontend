@@ -10,7 +10,8 @@
 }
 
 .Promo_backgraund {
-    background-color: #bd9393;
+    background: #F5F5F5;
+    border-radius: 10px;
     width: calc(100% - 80px);
     height: 100%;
     position: absolute;

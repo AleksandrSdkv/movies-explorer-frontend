@@ -115,6 +115,7 @@
     position: absolute;
     border: none;
     padding: 0;
+    background-color: #FFF;
 }
 
 @media screen and (max-width: 768px) {

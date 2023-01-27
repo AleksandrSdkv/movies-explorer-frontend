@@ -35,18 +35,18 @@ function Header() {
             {
                 location.pathname === '/' ?
 
-                    <div className='Header'>
+                    <header className='Header'>
                         <div className='Header__logo' />
                         <div className='Header__auth'>
                             <Link to="/signup" className='Header__text Header__sign-in'>Регистрация</Link>
 
                             <Link to="/signin" className='Header__text Header__text-sign-up'>Войти</Link>
                         </div>
-                    </div>
+                    </header>
 
                     : // Использован тернарный оператор для отрисовки хэдера
 
-                    <div className='Header'>
+                    <header className='Header'>
                         <Link to='/' className='Header__logo'></Link>
                         <Navigation />
                         <div className='Header__profile'>
@@ -77,7 +77,7 @@ function Header() {
                                     <Link to={'/saved-movies'} className='Header__menu-list'>Сохраненные фильмы</Link></div></ul>
                         </nav>
                         <button className={'Header__nav-bar'} onClick={handleBurgerClick}></button>
-                    </div>
+                    </header>
 
             }
         </>

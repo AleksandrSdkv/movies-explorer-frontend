@@ -88,3 +88,9 @@
     opacity: 0.6;
     cursor: pointer;
 }
+
+.Portfolio__website-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}

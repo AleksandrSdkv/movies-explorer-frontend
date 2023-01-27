@@ -5,10 +5,7 @@ import './Login.css';
 
 function Login() {
     return (
-        <div className="Login">
-
-
-
+        <main className="Login">
             <FormIdentify
                 link='/signup'
                 linkText='Ещё не зарегистрированы?'
@@ -19,7 +16,7 @@ function Login() {
             >
             </FormIdentify>
 
-        </div >
+        </main >
     )
 }
 

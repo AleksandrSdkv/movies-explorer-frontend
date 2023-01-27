@@ -6,7 +6,7 @@ import './__part/about-project__part.css';
 
 function AboutProject() {
     return (
-        <section className="about-project">
+        <article className="about-project">
 
             <h2 className='about-project__heading'>О проекте </h2>
 
@@ -32,7 +32,7 @@ function AboutProject() {
                 </div>
             </div>
 
-        </section >
+        </article >
     )
 }
 

@@ -10,7 +10,7 @@ import Header from '../Header/Header';
 
 function Main() {
     return (
-        <section className="Main">
+        <main className="Main">
             <Header />
             <Promo />
             <AboutProject />
@@ -18,7 +18,7 @@ function Main() {
             <AboutMe />
             <Portfolio />
             <Footer />
-        </section >
+        </main >
     )
 }
 

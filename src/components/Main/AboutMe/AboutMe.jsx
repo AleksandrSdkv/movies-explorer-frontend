@@ -8,7 +8,7 @@ import avatar from '../../../images/imgonline.png';
 function AboutMe() {
     return (
 
-        <section className='about-me'>
+        <article className='about-me'>
             <div className='about-me__heading'>Студент</div>
             <div className='about-me__wrapper'>
                 <div className='about-me__container'>
@@ -22,13 +22,13 @@ function AboutMe() {
                     <a href='https://github.com/AleksandrSdkv' target="_blank" rel="noopener noreferrer" className='about-me__about-git'>Github</a>
 
                 </div>
-                <div className='about-me__photo-wrapper'>
+                <figure className='about-me__photo-wrapper'>
                     <img className='about-me__photo' src={avatar} alt="Фото студента" />
-                </div>
+                </figure>
             </div>
 
 
-        </section>
+        </article>
 
     )
 }
