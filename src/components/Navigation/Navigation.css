@@ -1,0 +1,30 @@
+.Navigation__new-movies {
+    margin-right: 16px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.Navigation__saved-movies {
+    text-decoration: none;
+}
+
+.Navigation__text {
+    color: #000;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: center;
+}
+
+.Navigation__movies {
+    margin-left: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+@media screen and (max-width: 768px) {
+    .Navigation__movies {
+        visibility: hidden;
+        position: absolute;
+    }
+}

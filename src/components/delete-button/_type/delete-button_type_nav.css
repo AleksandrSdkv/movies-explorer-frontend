@@ -1,0 +1,36 @@
+.delete-button_type_nav {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    width: 22px;
+    height: 22px;
+    transition: opacity .3s;
+    align-self: self-end;
+    position: absolute;
+    right: 23px;
+    top: 23px;
+}
+
+@media screen and (max-width: 550px) {
+    .delete-button_type_nav {
+        right: 18px;
+        top: 22px;
+    }
+}
+
+.delete-button_type_nav-close {
+    visibility: hidden;
+    position: absolute;
+}
+
+.delete-button_type_nav-svg {
+    display: flex;
+    background-image: url(../../../images/x-svg.svg);
+    width: 22px;
+    height: 21.5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    transform: rotate(90deg);
+    border: none;
+}

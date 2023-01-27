@@ -1,0 +1,85 @@
+.about-project__info {
+    display: flex;
+    margin: 0;
+    margin-bottom: 110px;
+}
+
+@media screen and (max-width: 768px) {
+    .about-project__info {
+        margin-bottom: 93px;
+        gap: 30px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .about-project__info {
+        flex-direction: column;
+        margin-bottom: 0;
+        gap: 0px;
+    }
+}
+
+.about-project__info-part {
+    width: 100%;
+    margin-right: 11px;
+}
+
+@media screen and (max-width: 425px) {
+    .about-project__info-part:last-of-type {
+        width: 100%;
+        margin: 56px 0 60px 0;
+    }
+}
+
+
+/* Заголовок этапов */
+
+.about-project__info-heading {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    margin: 0;
+    margin-bottom: 26px;
+    letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 768px) {
+    .about-project__info-heading {
+        font-size: 20px;
+        line-height: 24px;
+        margin-bottom: 22px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .about-project__info-heading {
+        font-size: 18px;
+        line-height: 22px;
+        margin-bottom: 16px;
+        letter-spacing: -0.07em;
+    }
+}
+
+
+/* Текст этапов */
+
+.about-project__info-paragraph {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .about-project__info-paragraph {
+        font-size: 12px;
+        line-height: 18px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .about-project__info-paragraph {
+        font-size: 11px;
+        line-height: 16px;
+    }
+}

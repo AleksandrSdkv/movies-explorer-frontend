@@ -1,0 +1,39 @@
+.about-me__photo-wrapper {
+    margin: 0;
+    position: relative;
+    padding-top: 56.25%;
+    max-width: 270px;
+}
+
+@media screen and (max-width: 768px) {
+    .about-me__photo-wrapper {
+        width: 255px;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .about-me__photo-wrapper {
+        margin: 0;
+        position: relative;
+        padding: 0;
+        max-width: 292px;
+        height: 352px;
+    }
+}
+
+.about-me__photo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    border-radius: 10px;
+}
+
+@media screen and (max-width: 620px) {
+    .about-me__photo {
+        width: 292px;
+        border-radius: 10px;
+        position: unset;
+        height: 352px;
+    }
+}

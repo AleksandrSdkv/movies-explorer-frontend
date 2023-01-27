@@ -1,0 +1,207 @@
+/* Хедер */
+
+.Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 70px 22px 70px;
+}
+
+@media screen and (max-width: 768px) {
+    .Header {
+        margin: 0 30px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .Header {
+        margin: 0 14px;
+    }
+}
+
+
+/*Logo */
+
+.Header__logo {
+    background-image: url(../../images/logo.png);
+    width: 38px;
+    height: 38px;
+    margin: 18px 0 18px 0;
+    background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 768px) {
+    .Header__logo {
+        margin: 12px 0 18px 0;
+    }
+}
+
+.Header__auth {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0 20px 0px;
+    align-items: center
+}
+
+@media screen and (max-width: 768px) {
+    .Header__auth {
+        margin: 18px 0 18px 0px;
+    }
+}
+
+
+/* Header text */
+
+.Header__text {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+    .Header__text {
+        font-size: 10px;
+        line-height: 16px;
+    }
+}
+
+.Header__sign-in {
+    color: #000000;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+    .Header__text {
+        font-size: 10px;
+        line-height: 16px;
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
+
+
+/* Регистрация  */
+
+.Header__text-sign-up {
+    margin-left: 30px;
+    background-color: #3456F3;
+    color: #E5E5E5;
+    padding: 8px 20px;
+    border-radius: 3px;
+}
+
+@media screen and (max-width: 768px) {
+    .Header__text-sign-up {
+        margin-left: 30px;
+        width: 76px;
+        padding: 8px 0 8px 0;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
+
+
+/* Бургер меню скрытые стили */
+
+.Header__nav-bar {
+    background-image: url(../../images/burger.svg);
+    background-repeat: no-repeat;
+    width: 48px;
+    height: 48px;
+    visibility: hidden;
+    position: absolute;
+    border: none;
+    padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .Header__nav-bar {
+        visibility: visible;
+        position: relative;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .Header__nav-bar {
+        width: 39px;
+        height: 36px;
+        background-size: contain;
+    }
+}
+
+.Header__nav-bar_close {
+    display: none;
+}
+
+.header__nav_hidden {
+    position: absolute;
+    display: none;
+}
+
+
+/* Меню в боковой панели*/
+
+.Header__menu_nav {
+    position: fixed;
+    width: 520px;
+    height: 100vh;
+    background-color: #fbfcfd;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    visibility: hidden;
+}
+
+@media screen and (max-width: 768px) {
+    .Header__menu_nav {
+        visibility: visible;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .Header__menu_nav {
+        width: 320px;
+    }
+}
+
+.Header__menu-list {
+    text-decoration: none;
+    color: #000000;
+}
+
+.line::after {
+    content: '';
+    display: block;
+    height: 2px;
+    background: #000000;
+    position: relative;
+    top: 7px;
+}
+
+.Header_ul_nav {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 154px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    display: flex;
+    gap: 28px;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media screen and (max-width: 550px) {
+    .Header_ul_nav {
+        gap: 23px;
+        top: 148px;
+    }
+}
