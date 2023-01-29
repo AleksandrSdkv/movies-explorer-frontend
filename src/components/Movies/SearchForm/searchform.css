@@ -8,6 +8,18 @@
     }
 }
 
+.SearchForm__error {
+    position: absolute;
+    top: 30px;
+    left: 5px;
+    color: #EE3465;
+    height: 18px;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+    width: 225px;
+}
+
 .searchform {
     display: flex;
     justify-content: center;

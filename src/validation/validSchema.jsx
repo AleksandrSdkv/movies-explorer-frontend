@@ -5,16 +5,23 @@ const BasicFormSchema = Yup.object().shape({
         //Проверяем, корректный ли адрес.
         //Если нет, то выводится сообщение в скобках
         .email("Е-mail адрес не корректен")
-        //не сабмитим, если поле не заполнено
-        .required("Required"),
+
+        .required("Пожалуйста, введите E-mail"),
     username: Yup.string()
-        //минимальная длина - 2 символа
-        .min(2, "Минимум 2 символа")
+        .required("Пожалуйста, введите имя")
+        .min(2, (obj) => {
+            const valueLength = obj.value.length;
+            return `Введено ${valueLength} из 2 необходимых символов.`;
+        })
         //максимальная длина - 20 символов
-        .max(20, "Максимум 20 символов")
-        .required("Required"),
+        .max(20, "Максимум 20 символов"),
     password: Yup.string()
-        .min(8, "Минимум 8 символов")
-        .required("Required")
+        .min(8, (obj) => {
+            const valueLength = obj.value.length;
+            return `Введено ${valueLength} из 8 необходимых символов.`;
+        })
+        .required("Пожалуйста, введите пароль"),
+    nameFilm: Yup.string()
+        .required("Пожжалуйста, введите ключевое слово"),
 });
 export default BasicFormSchema;
