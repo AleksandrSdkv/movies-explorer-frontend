@@ -20,18 +20,15 @@ export default function App() {
   const [preloader, setPreloader] = useState(false)
   //Объ. функцию которая, 
   async function showFilm(values) { //  Вызывается  по submit в компоненте SearchForm
-
     setPreloader(true);
     await loadJson()             //      запрашивает API фильмов здаесь
       .then(data => {      //     и передает в state фильмов
-
-        const filterFilms = data.filter(film => {
-          return film.nameRU.toLowerCase().includes(values.filmName.toLowerCase())
-        })
-        setIsFilm(filterFilms);
+        const filterFilms = data.filter(film =>
+          film.nameRU.toLowerCase().includes(values.filmName.toLowerCase()));
+        return filterFilms;
+      }).then((filterFilms) => {
+        setIsFilm(filterFilms)
       })
-
-
     setPreloader(false);
   };
 
