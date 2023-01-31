@@ -7,13 +7,21 @@ import MoreMovies from './MoreMovies/MoreMovies'
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
-function Movies() {
+function Movies({ showFilm, renderFilm }) {
+
+
     return (<>
+
         <Header />
-        <SearchForm />
-        <MoviesCardList />
+        <SearchForm
+            showFilm={showFilm}
+        />
+        <MoviesCardList
+            renderFilm={renderFilm}
+        />
         <MoreMovies />
         <Footer />
+
     </>
     )
 }

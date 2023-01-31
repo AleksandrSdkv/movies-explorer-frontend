@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-const BasicFormSchema = Yup.object().shape({
+const SchemaForRegister = Yup.object().shape({
     email: Yup.string()
         //Проверяем, корректный ли адрес.
         //Если нет, то выводится сообщение в скобках
@@ -21,7 +21,8 @@ const BasicFormSchema = Yup.object().shape({
             return `Введено ${valueLength} из 8 необходимых символов.`;
         })
         .required("Пожалуйста, введите пароль"),
-    nameFilm: Yup.string()
-        .required("Пожжалуйста, введите ключевое слово"),
+
 });
-export default BasicFormSchema;
+export default SchemaForRegister;
+
+

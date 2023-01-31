@@ -2,15 +2,19 @@ import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './movies-card-list.css';
 
-import film from '../../../images/img'
 
-function MoviesCardList() {
+
+function MoviesCardList({ renderFilm }) {
+    console.log(renderFilm)
+
+    
     return (
         <>
             <ul className="movies-card-list__list" >
-                {film.map((item, index) =>
-                    <MoviesCard key={index} card={item} />)
-                }
+
+                {renderFilm.map((item) =>
+                    <MoviesCard key={item.id} film={item} />
+                )}
             </ul>
 
         </>
