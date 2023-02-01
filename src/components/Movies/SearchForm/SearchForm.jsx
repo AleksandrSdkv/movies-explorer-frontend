@@ -16,7 +16,7 @@ function SearchForm({ showFilm }) {
         submitProps.resetForm()
 
     }
-
+    
     const onChange = () => {
         console.log('dasdasd')
     }

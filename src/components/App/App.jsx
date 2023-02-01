@@ -36,7 +36,7 @@ export default function App() {
         }
         setIsFilm(filterFilms)
         setIsload(false);
-      })
+      }).catch((err) => { console.log(`"Ошибка"${err}`) });
     setPreloader(false);
 
   };
