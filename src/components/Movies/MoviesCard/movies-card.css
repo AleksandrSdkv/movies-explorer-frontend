@@ -41,7 +41,7 @@
         
         @media screen and (max-width: 768px) {
             .movies-card__name {
-                max-width: 270px;
+                max-width: 180px;
             }
         }
         

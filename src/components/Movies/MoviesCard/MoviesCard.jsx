@@ -11,14 +11,14 @@ function MoviesCard({ film }) {
     const likeMovie = (`${!isLike ? 'movies-card__like_active' : ''}`);
     const url = `https://api.nomoreparties.co/${film.image.url}`;
 
+    const hours = `${Math.floor(film.duration / 60) === 0 ? '0' : Math.floor(film.duration / 60)}.${Math.floor(film.duration % 60)}ч.`
+
+
     function handleLikeClick() {
         setLike(likeMovie);
     }
     return (
-
         <>
-
-
             <li className="movies-card__group">
                 <a href={film.trailerLink} target="_blank" rel="noreferrer">
                     <img className='movies-card__mask movies-card__text' src={url} alt={film.nameRU} />
@@ -29,7 +29,7 @@ function MoviesCard({ film }) {
                         <div id={isLike} className={`movies-card__like_inactive`} ></div>
                     </button>
                 </div>
-                <p className="movies-card__time movies-card__text">{film.time}</p>
+                <p className="movies-card__time movies-card__text">{hours}</p>
             </li >
         </>
     )

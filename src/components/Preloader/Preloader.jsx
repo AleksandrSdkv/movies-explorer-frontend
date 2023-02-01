@@ -12,6 +12,7 @@ import { useContext } from 'react';
 import { CurrentContext } from '../../context/context'
 const Preloader = () => {
     const { preloader } = useContext(CurrentContext);
+
     return (
 
         <>

@@ -3,11 +3,11 @@ import React from 'react';
 import './Movies.css';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 import SearchForm from './SearchForm/SearchForm';
-import MoreMovies from './MoreMovies/MoreMovies'
+
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
-function Movies({ showFilm, renderFilm }) {
+function Movies({ showFilm, renderFilm, isLoad }) {
 
 
     return (<>
@@ -18,8 +18,9 @@ function Movies({ showFilm, renderFilm }) {
         />
         <MoviesCardList
             renderFilm={renderFilm}
+            isLoad={isLoad}
         />
-        <MoreMovies />
+      
         <Footer />
 
     </>

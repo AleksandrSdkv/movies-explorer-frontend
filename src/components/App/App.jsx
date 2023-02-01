@@ -18,7 +18,9 @@ export default function App() {
 
   const [isFilms, setIsFilm] = useState([]);
   const [preloader, setPreloader] = useState(false)
+  const [isLoad, setIsload] = useState(false);
   //Объ. функцию которая, 
+
   async function showFilm(values) { //  Вызывается  по submit в компоненте SearchForm
     setPreloader(true);
     await loadJson()             //      запрашивает API фильмов здаесь
@@ -26,10 +28,17 @@ export default function App() {
         const filterFilms = data.filter(film =>
           film.nameRU.toLowerCase().includes(values.filmName.toLowerCase()));
         return filterFilms;
+
       }).then((filterFilms) => {
+        if (filterFilms.length === 0) {
+          setIsFilm([])
+          return setIsload(true);
+        }
         setIsFilm(filterFilms)
+        setIsload(false);
       })
     setPreloader(false);
+
   };
 
   return (
@@ -41,7 +50,8 @@ export default function App() {
         <Route path="/signup" element={<Register />} />
         <Route path="/movies" element={<Movies
           renderFilm={isFilms} //      Передаем стейт фильмов в компонент 
-          showFilm={showFilm}  //     передаем функцию в SearchForm через Movies
+          showFilm={showFilm}
+          isLoad={isLoad} //     передаем функцию в SearchForm через Movies
         />} />
         <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/profile" element={<Profile />} />

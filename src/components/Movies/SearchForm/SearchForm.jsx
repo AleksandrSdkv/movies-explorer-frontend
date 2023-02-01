@@ -1,6 +1,5 @@
 import React from 'react';
 import './searchform.css';
-
 import { Formik, Field, Form } from "formik";
 import * as Yup from 'yup'
 
@@ -18,7 +17,9 @@ function SearchForm({ showFilm }) {
 
     }
 
-
+    const onChange = () => {
+        console.log('dasdasd')
+    }
     return (
 
         <section className='searchform'>
@@ -46,7 +47,7 @@ function SearchForm({ showFilm }) {
             </div>
 
             <label className="searchform__toggle">
-                <input className="searchform__toggle-checkbox" type="checkbox" />
+                <input className="searchform__toggle-checkbox" type="checkbox" onChange={onChange} />
 
                 <div className="searchform__toggle-switch"></div>
                 <span className="searchform__toggle-label">Короткометражки</span>
