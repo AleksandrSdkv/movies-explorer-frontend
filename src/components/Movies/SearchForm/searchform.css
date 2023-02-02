@@ -22,7 +22,6 @@
 
 .searchform {
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 48px;
     margin: 80px 70px 80px 70px;
@@ -53,6 +52,8 @@
     background: #FAFAFA;
     border-radius: 50px;
     border: 1.5px solid rgb(170, 170, 170, .5);
+    display: flex;
+    align-items: baseline;
 }
 
 .searchform__input {
@@ -95,6 +96,7 @@
     cursor: pointer;
     display: flex;
     flex-direction: row-reverse;
+    margin-left: 10px;
 }
 
 @media screen and (max-width: 768px) {

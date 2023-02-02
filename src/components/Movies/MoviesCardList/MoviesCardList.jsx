@@ -1,13 +1,10 @@
 import React from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './movies-card-list.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import MoreMovies from '../MoreMovies/MoreMovies'
-import { useEffect } from 'react';
-function MoviesCardList({ renderFilm, isLoad }) {
-    console.log(renderFilm.length)
+function MoviesCardList({ cards }) {
     const [showCard, setShowCard] = useState();
-
     useEffect(() => {
         const windowScreen = document.documentElement.clientWidth;
         if (windowScreen > 801) {
@@ -18,21 +15,19 @@ function MoviesCardList({ renderFilm, isLoad }) {
             console.log(1)
             setShowCard(1)
         }
-    }, [isLoad]);
-
-    function count() {
-        setShowCard(showCard + 1)
-    }
+    }, []);
 
     return (
         <>
-            {isLoad && <p className='more-movie__nothing-search'>Ничего не найдено</p>}
+            {<p className='more-movie__nothing-search'>Ничего не найдено</p>}
             <ul className="movies-card-list__list" >
-                {renderFilm.length !== 0 && renderFilm.map((item, index) =>
-                    index < showCard && <MoviesCard key={item.id} film={item} />
+
+                {cards.map((item, index) =>
+                    index < showCard && < MoviesCard key={item.id} film={item} />
                 )}
             </ul>
-            {renderFilm.length !== 0 && <MoreMovies count={count} />}
+
+            {cards.length !== 0 && cards.length >= showCard && <MoreMovies />}
         </>
     )
 }

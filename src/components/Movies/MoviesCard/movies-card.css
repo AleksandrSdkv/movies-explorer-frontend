@@ -29,7 +29,7 @@
         }
         
         .movies-card__name {
-            max-width: 218px;
+            max-width: 211px;
             height: 48px;
             margin: 0;
             font-weight: 500;
@@ -39,9 +39,15 @@
             text-overflow: ellipsis;
         }
         
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 990px) {
             .movies-card__name {
                 max-width: 180px;
+            }
+        }
+        
+        @media screen and (max-width: 790px) {
+            .movies-card__name {
+                max-width: 170px;
             }
         }
         

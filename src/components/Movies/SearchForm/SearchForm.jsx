@@ -1,9 +1,12 @@
 import React from 'react';
 import './searchform.css';
-import { Formik, Field, Form } from "formik";
+import { Formik, Field, Form, useField } from "formik";
 import * as Yup from 'yup'
+import { useState } from 'react';
 
-function SearchForm({ showFilm }) {
+
+function SearchForm({ filter }) {
+    const [state, setstate] = useState('');
     // Валидация с библиотекой Yup
     const SchemaForLogin = Yup.object().shape({
         filmName: Yup.string()
@@ -11,26 +14,43 @@ function SearchForm({ showFilm }) {
     });
 
     // Обработчик который оправляет содержание input's в App
-    const onSubmit = (values, submitProps) => {
-        showFilm(values)
-        submitProps.resetForm()
+    const onSubmit = (values) => {
+        setstate(values.filmName)
+        filter(values.filmName, values.acceptedTerms)
+    }
+    const handleChange = (values) => {
+        if (state.length !== 0) {
+            filter(state, values.target.checked)
+        }
+    }
 
-    }
-    
-    const onChange = () => {
-        console.log('dasdasd')
-    }
+    const CheckBox = ({ children, ...props }) => {
+        const [field] = useField({ ...props, type: 'checkbox' });
+        return (
+
+            <label className="searchform__toggle">
+                <input className="searchform__toggle-checkbox" type="checkbox"{...field} {...props} onClick={handleChange} />
+                {children}
+            </label>
+
+
+        );
+    };
+
     return (
-
         <section className='searchform'>
 
             <div className="searchform__container">
                 <Formik
                     initialValues={{
                         filmName: '',
+                        acceptedTerms: false,
                     }}
                     validationSchema={SchemaForLogin}
                     onSubmit={onSubmit}
+                    onChange={(e, event) => {
+                        handleChange({ ...event, target: { name: 'acceptedTerms', value: e } })
+                    }}
                 >
                     {({ errors, touched }) => (
                         <Form className='searchform__form' >
@@ -41,19 +61,17 @@ function SearchForm({ showFilm }) {
                             <Field className='searchform__input' type="text" name='filmName' placeholder="Фильм" />
 
                             <button className='searchform__button' type="submit"></button>
-
+                            <CheckBox name="acceptedTerms">
+                                <div className="searchform__toggle-switch"></div>
+                                <span className="searchform__toggle-label">Короткометражки</span>
+                            </CheckBox>
                         </Form>)}
                 </ Formik>
             </div>
-
-            <label className="searchform__toggle">
-                <input className="searchform__toggle-checkbox" type="checkbox" onChange={onChange} />
-
-                <div className="searchform__toggle-switch"></div>
-                <span className="searchform__toggle-label">Короткометражки</span>
-            </label>
         </section >
     )
 }
 
-export default SearchForm; 
+export default SearchForm;
+
+
