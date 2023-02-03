@@ -1,0 +1,109 @@
+.about-project__part {
+    margin: 0;
+    display: flex;
+}
+
+
+/* Количество недель бэк */
+
+.about-project__part-week {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16.94px;
+    text-align: center;
+    margin: 0;
+    margin-bottom: 17px;
+}
+
+@media screen and (max-width: 425px) {
+    .about-project__part-week {
+        margin-bottom: 10px;
+        font-size: 11px;
+        line-height: 13px;
+    }
+}
+
+.about-project__part-week_type_front {
+    background-color: #F2F2F2;
+    padding: 9px 0 9px 0;
+}
+
+@media screen and (max-width: 425px) {
+    .about-project__part-week_type_front {
+        background-color: #F2F2F2;
+        padding: 11px 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .about-project__part-week_type_front {
+        background-color: #F2F2F2;
+        padding: 9x 0;
+        margin-bottom: 14px;
+    }
+}
+
+.about-project__part-week_type_back {
+    background-color: #3456F3;
+    padding: 9px 0;
+    color: #fff;
+    width: 228px;
+}
+
+@media screen and (max-width: 768px) {
+    .about-project__part-week_type_back {
+        padding: 9px 0;
+        width: 140px;
+        margin-bottom: 14px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .about-project__part-week_type_back {
+        background-color: #3456F3;
+        padding: 11px 0;
+        color: #fff;
+    }
+}
+
+
+/* Количество недель фронт */
+
+.about-project__part-stage {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    margin: 0;
+    color: #A0A0A0;
+}
+
+@media screen and (max-width: 425px) {
+    .about-project__part-stage {
+        font-size: 11px;
+        line-height: 13px;
+    }
+}
+
+.about-project__part-front {
+    margin: 0;
+    width: 228px;
+}
+
+@media screen and (max-width: 768px) {
+    .about-project__part-front {
+        margin: 0;
+        width: 140px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .about-project__part-front {
+        margin: 0;
+        width: 154px;
+    }
+}
+
+.about-project__part-back {
+    width: 100%;
+}

@@ -1,0 +1,160 @@
+.searchform__container {
+    width: 932px;
+}
+
+@media screen and (max-width: 768px) {
+    .searchform__container {
+        width: 100%;
+    }
+}
+
+.searchform {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    margin: 80px 70px 80px 70px;
+    border-bottom: 1px solid #AAAAAA;
+    padding-bottom: 80px;
+    opacity: 1;
+}
+
+@media screen and (max-width: 768px) {
+    .searchform {
+        margin: 70px 30px 85px 30px;
+        flex-direction: column;
+        padding-bottom: 48px;
+        height: 100px;
+        margin: 73px 10px 86px 10px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .searchform {
+        margin: 73px 10px 46px 10px;
+    }
+}
+
+.searchform__form {
+    position: relative;
+    margin: 0 auto;
+    background: #FAFAFA;
+    border-radius: 50px;
+    border: 1.5px solid rgb(170, 170, 170, .5);
+}
+
+.searchform__input {
+    height: 48px;
+    padding: 0 0 0 22px;
+    min-width: calc(100% - 20px);
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.searchform__input:focus {
+    box-shadow: 0px 10px 20px 5px rgb(52, 86, 243, 0.5);
+}
+
+.searchform__button {
+    height: 34px;
+    width: 58px;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    cursor: pointer;
+    border: none;
+    background-color: #3456F3;
+    border-radius: 48px;
+    color: #fff;
+}
+
+.searchform__button:before {
+    content: "Найти";
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 18px;
+    text-align: center;
+}
+
+.searchform__toggle {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+@media screen and (max-width: 768px) {
+    .searchform__toggle {
+        position: relative;
+        top: -9px;
+    }
+}
+
+.searchform__toggle-switch {
+    display: inline-block;
+    background: #ccc;
+    border-radius: 20px;
+    width: 36px;
+    height: 20px;
+    position: relative;
+}
+
+.searchform__toggle-switch:before,
+.searchform__toggle-switch:after {
+    content: "";
+}
+
+.searchform__toggle-switch:before {
+    display: block;
+    background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: left 0.25s;
+}
+
+.searchform__toggle:hover .searchform__toggle-switch:before {
+    background: linear-gradient(to bottom, #fff 0%, #fff 100%);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.searchform__toggle-checkbox:checked+.searchform__toggle-switch {
+    background: #2BE080;
+}
+
+.searchform__toggle-checkbox:checked+.searchform__toggle-switch:before {
+    left: 18px;
+}
+
+.searchform__toggle-checkbox {
+    position: absolute;
+    visibility: hidden;
+}
+
+.searchform__toggle-label {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    position: relative;
+    margin: 0 12px 0 0;
+}
+
+@media screen and (max-width: 768px) {
+    .searchform__toggle-label {
+        margin: 0 12px 0 0;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .searchform__toggle-label {
+        font-size: 11px;
+        line-height: 18px;
+        margin: 0 13px 0 0;
+    }
+}

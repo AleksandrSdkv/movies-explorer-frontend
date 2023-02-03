@@ -1,0 +1,28 @@
+.delete-button_type_movie {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
+    background-color: #F4F4F4;
+    border-radius: 36px;
+    width: 24px;
+    height: 24px;
+    transition: opacity .3s;
+}
+
+.delete-button_type_movie-svg {
+    display: flex;
+    background-image: url(../../../images/x-svg.svg);
+    width: 10px;
+    height: 8.5px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 4.5px 0px 6px 7px;
+    transform: rotate(270deg);
+    opacity: 0;
+}
+
+.delete-button_type_movie-svg:hover {
+    opacity: 1;
+    cursor: pointer;
+}

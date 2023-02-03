@@ -1,0 +1,144 @@
+.FormIdentify__form {
+    width: 396px;
+    background: none;
+    outline: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+@media screen and (max-width: 420px) {
+    .FormIdentify__form {
+        width: 266px;
+    }
+}
+
+.FormIdentify__fieldset {
+    display: flex;
+    flex-direction: column;
+    background: none;
+    outline: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.FormIdentify__input {
+    width: 100%;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    background: none;
+    outline: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    border-bottom: 1px #E8E8E8 solid;
+    padding-bottom: 10px;
+}
+
+.FormIdentify__input:focus {
+    border-bottom: 1px #3456F3 solid;
+}
+
+.FormIdentify__label {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #A0A0A0;
+    margin-bottom: 6px;
+}
+
+.FormIdentify__label-text {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12px;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.FormIdentify__button {
+    margin: 0;
+    padding: 13px 0 15px 0;
+    margin-top: 128px;
+    background: none;
+    outline: none;
+    border: none;
+    background: #3456F3;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    width: 100%;
+    border-radius: 3px;
+}
+
+@media screen and (max-width: 420px) {
+    .FormIdentify__button {
+        margin-top: 217px;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 15px;
+    }
+}
+
+.FormIdentify__button-log {
+    margin-top: 198px;
+    border-radius: 3px;
+}
+
+@media screen and (max-width: 420px) {
+    .FormIdentify__button-log {
+        margin-top: 287px;
+    }
+}
+
+.FormIdentify__button:hover {
+    opacity: 0.8;
+}
+
+.FormIdentify__input__error {
+    color: #EE3465;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+}
+
+.FormIdentify__input__error-t {
+    height: 18px;
+}
+
+.FormIdentify__link-text {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #A0A0A0;
+}
+
+@media screen and (max-width: 420px) {
+    .FormIdentify__link-text {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}
+
+.FormIdentify__move-text {
+    color: #3456F3;
+    margin: 0;
+    padding: 0;
+    margin-left: 6px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.FormIdentify__move-text:hover {
+    opacity: 0.8;
+}

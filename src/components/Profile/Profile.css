@@ -1,0 +1,167 @@
+.Profile__header {
+    text-align: center;
+    margin: 74px 0 123px 0;
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+    .Profile__header {
+        margin: 241px 0 94px 0;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .Profile__header {
+        margin: 180px 0 94px 0;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    .Profile__header {
+        margin: 140px 0 94px 0;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .Profile__header {
+        margin: 75px 0 82px 0;
+    }
+}
+
+.Profile {
+    border: none;
+    display: flex;
+    max-width: 410px;
+    flex-direction: column;
+    margin: auto;
+    align-content: space-between;
+    align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+    .Profile {
+        max-width: 260px;
+    }
+}
+
+.Profile__form {
+    border: none;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.Profile__fieldset {
+    border: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Profile__input {
+    font-size: 11px;
+    line-height: 13px;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    border: none;
+    width: 90%;
+    text-align: right;
+    outline: none;
+}
+
+@media screen and (max-width: 768px) {
+    .Profile__input {
+        width: 87%;
+    }
+}
+
+.Profile__input:focus {
+    border-bottom: 1px solid #3456F3;
+}
+
+.Profile__label {
+    width: 100%;
+    display: flex;
+    font-size: 11px;
+    line-height: 15px;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    margin-bottom: 220px;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 768px) {
+    .Profile__label {
+        margin-bottom: 210px;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .Profile__label {
+        font-size: 11px;
+        line-height: 13px;
+        margin-bottom: 260px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .Profile__label {
+        font-size: 11px;
+        line-height: 13px;
+        margin-bottom: 300px;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .Profile__label {
+        font-size: 11px;
+        line-height: 13px;
+        margin-bottom: 380px;
+    }
+}
+
+.Profile__label-name {
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 16px;
+    margin-bottom: 17px;
+}
+
+.Profile__input-btn {
+    border: none;
+    margin-bottom: 16px;
+    background-color: #FFFFFF;
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 400;
+}
+
+@media screen and (max-width: 420px) {
+    .Profile__input-btn {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}
+
+.Profile__out-btn {
+    border: none;
+    background-color: #FFFFFF;
+    color: #EE3465;
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: 500;
+    padding: 0;
+    margin: 0 0 70px 0;
+}
+
+@media screen and (max-width: 420px) {
+    .Profile__out-btn {
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

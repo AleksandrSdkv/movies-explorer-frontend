@@ -1,0 +1,11 @@
+.about-me__wrapper {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+@media screen and (max-width: 620px) {
+    .about-me__wrapper {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}

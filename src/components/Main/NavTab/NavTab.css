@@ -1,0 +1,39 @@
+.Promo__nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.Promo__nav-item {
+    background: #E8E8E8;
+    padding: 10px 0;
+    text-align: center;
+    min-width: 96px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    font-size: 12px;
+    line-height: 16px;
+}
+
+.Promo__nav-item:hover {
+    background-color: #3456F3;
+    color: #fff;
+    transform: scale(1.15);
+    transition: transform 0.4s ease;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .Promo__nav-item {
+        padding: 9px 0;
+        margin-bottom: 30px;
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .Promo__nav-item {
+        padding: 5px 0;
+        margin-bottom: 17px;
+        min-width: 82px;
+    }
+}
