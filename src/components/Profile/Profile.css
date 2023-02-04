@@ -33,7 +33,7 @@
 .Profile {
     border: none;
     display: flex;
-    max-width: 410px;
+    width: 410px;
     flex-direction: column;
     margin: auto;
     align-content: space-between;

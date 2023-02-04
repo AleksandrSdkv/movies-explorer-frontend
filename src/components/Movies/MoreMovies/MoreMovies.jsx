@@ -2,11 +2,12 @@ import React from 'react';
 import './more-movie.css';
 
 
-function MoreMovies({ count, isButtun }) {
+function MoreMovies() {
+
     return (
 
         <div className="more-movie">
-            <button className="more-movie__btn" onClick={count}>Ещё</button>
+            <button className="more-movie__btn" >Ещё</button>
         </div>
 
     )

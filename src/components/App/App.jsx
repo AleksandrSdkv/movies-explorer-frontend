@@ -8,7 +8,6 @@ import Profile from '../Profile/Profile';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import { useState } from 'react'
 
 
 import { CurrentContext } from '../../context/context';
@@ -16,37 +15,13 @@ import { CurrentContext } from '../../context/context';
 
 export default function App() {
 
-  // const [isFilms, setIsFilm] = useState([]);
-  // const [preloader, setPreloader] = useState(false)
-  // const [isLoad, setIsload] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
 
-  // //Объ. функцию которая, 
-  // async function showFilm(values) { //  Вызывается  по submit в компоненте SearchForm
-  //   setPreloader(true);
-  //   await loadJson()             //      запрашивает API фильмов здаесь
-  //     .then(data => {      //     и передает в state фильмов
-  //       const filterFilms = data.filter(film =>
-  //         film.nameRU.toLowerCase().includes(values.filmName.toLowerCase()));
-  //       return filterFilms;
+  // const [currentUser, setCurrentUser] = useState({});
 
-  //     }).then((filterFilms) => {
-  //       if (filterFilms.length === 0) {
-  //         setIsFilm([])
-  //         return setIsload(true);
-  //       }
-  //       setReload(!reload)
-  //       setIsFilm(filterFilms)
-  //       setIsload(false);
-  //     }).catch((err) => {
-  //       console.log(`"Ошибка"${err}`)
-  //     });
-  //   setPreloader(false);
-  // };
 
   return (
 
-    <CurrentContext.Provider value={currentUser}>
+    <CurrentContext.Provider>
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/signin" element={<Login />} />

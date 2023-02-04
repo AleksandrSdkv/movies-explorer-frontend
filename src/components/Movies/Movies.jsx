@@ -12,6 +12,7 @@ function Movies() {
     const [cards, setCards] = useState([]);
     const [renderedCards, setRenderedCards] = useState([]);
     const [preloader, setPreloader] = useState(false);
+    const [noMovies, setNoMovies] = useState(false);
     useEffect(() => {
         moviesApi.getMovies().then((serverCards) => {
             setCards(serverCards);
@@ -19,21 +20,15 @@ function Movies() {
     }, [])
     function filter(nameRU = '', isShorts = false) {
         setPreloader(true);
-        let promise = new Promise((resolve, reject) => {
-            resolve(cards.filter((card) => {
-                if (isShorts) {
-                    return card.duration <= 40 && card.nameRU.toLowerCase().includes(nameRU.toLowerCase())
-                }
-                return card.nameRU.toLowerCase().includes(nameRU.toLowerCase())
-            })
-            )
-        });
-        promise.then(result => {
-            setPreloader(false);
-            setRenderedCards(result)
-        }, error => {
-            console.log(`'Произошла ошибка ${error}'`)
+        const film = cards.filter((card) => {
+            if (isShorts) {
+                return card.duration <= 40 && card.nameRU.toLowerCase().includes(nameRU.toLowerCase())
+            }
+            return card.nameRU.toLowerCase().includes(nameRU.toLowerCase())
         })
+        setPreloader(false);
+        setRenderedCards(film)
+        setNoMovies(true)
     }
 
     return (<>
@@ -44,6 +39,7 @@ function Movies() {
 
         <MoviesCardList
             cards={renderedCards}
+            noMovies={noMovies}
         />
         {preloader && <Preloader />}
         <Footer />
