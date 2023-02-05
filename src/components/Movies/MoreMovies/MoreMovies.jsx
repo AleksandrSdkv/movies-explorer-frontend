@@ -2,12 +2,12 @@ import React from 'react';
 import './more-movie.css';
 
 
-function MoreMovies() {
+function MoreMovies({ showMovies }) {
 
     return (
 
         <div className="more-movie">
-            <button className="more-movie__btn" >Ещё</button>
+            <button className="more-movie__btn" onClick={showMovies}>Ещё</button>
         </div>
 
     )

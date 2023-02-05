@@ -13,12 +13,19 @@ function Movies() {
     const [renderedCards, setRenderedCards] = useState([]);
     const [preloader, setPreloader] = useState(false);
     const [noMovies, setNoMovies] = useState(false);
+    const [isFailConnect, setIsFailConnect] = useState(false);
+
     useEffect(() => {
+
         moviesApi.getMovies().then((serverCards) => {
             setCards(serverCards);
-        })
+        }).catch((err) => {
+            console.error(err);
+            setIsFailConnect(true);
+        });
     }, [])
-    function filter(nameRU = '', isShorts = false) {
+    function filter(nameRU = '', isShorts) {
+
         setPreloader(true);
         const film = cards.filter((card) => {
             if (isShorts) {
@@ -35,11 +42,13 @@ function Movies() {
         <Header />
         <SearchForm
             filter={filter}
+         
         />
 
         <MoviesCardList
             cards={renderedCards}
             noMovies={noMovies}
+            isFailConnect={isFailConnect}
         />
         {preloader && <Preloader />}
         <Footer />

@@ -10,7 +10,7 @@ import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
 
 
-import { CurrentContext } from '../../context/context';
+
 
 
 export default function App() {
@@ -21,21 +21,20 @@ export default function App() {
 
   return (
 
-    <CurrentContext.Provider>
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/signin" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/movies" element={<Movies
-        />} />
-        <Route path="/saved-movies" element={<SavedMovies
 
-        />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
+    <Routes>
+      <Route path="/" element={<Main />} />
+      <Route path="/signin" element={<Login />} />
+      <Route path="/signup" element={<Register />} />
+      <Route path="/movies" element={<Movies
+      />} />
+      <Route path="/saved-movies" element={<SavedMovies
 
-    </CurrentContext.Provider>
+      />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="*" element={<PageNotFound />} />
+    </Routes>
+
 
   );
 }

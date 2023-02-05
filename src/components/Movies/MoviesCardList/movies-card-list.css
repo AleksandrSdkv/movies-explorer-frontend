@@ -26,3 +26,23 @@
         margin: 0 10px;
     }
 }
+
+.movies-card-list__error {
+    margin: 0 30px 80px 30px;
+    padding: 0;
+    width: 520px;
+    text-align: center;
+    place-self: center;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+@media screen and (max-width: 580px) {
+    .movies-card-list__error {
+        width: 300px;
+        font-size: 13px;
+        line-height: 18px;
+        margin: 0 10px 80px 10px;
+    }
+}
