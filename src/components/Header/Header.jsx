@@ -1,9 +1,8 @@
-import React from 'react';
 import { useState, useEffect } from 'react';
 import './Header.css';
 import './Header__profile.css';
 import '../delete-button/_type/delete-button_type_nav.css'
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation  } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
 
 

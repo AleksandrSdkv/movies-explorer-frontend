@@ -1,26 +1,16 @@
-import React from 'react';
 import FormIdentify from '../FormIdentify/FormIdentify';
 import './Login.css';
 import { Link } from 'react-router-dom';
 import { Formik, Form, } from "formik";
-
-import * as Yup from 'yup'
+import { useAuth } from '../../hook/useAuth';
+import { SchemaForLogin } from '../../validation/SchemaForLogin'
 
 function Login() {
-    const SchemaForLogin = Yup.object().shape({
-        email: Yup.string()
-            .email("Е-mail адрес не корректен")
-            .required("Пожалуйста, введите E-mail"),
-        password: Yup.string()
-            .min(8, (obj) => {
-                const valueLength = obj.value.length;
-                return `Введено ${valueLength} из 8 необходимых символов.`;
-            })
-            .required("Пожалуйста, введите пароль"),
+    const { handleLogin } = useAuth();
 
-    });
     const onSubmit = (values, submitProps) => {
-        console.log(values)
+        const { email, password } = values;
+        handleLogin(email, password);
         submitProps.resetForm()
     }
     return (
@@ -50,7 +40,7 @@ function Login() {
                         <FormIdentify
                             label="Пароль"
                             name="password"
-                            type="text"
+                            type="password"
                             placeholder="Введите пароль"
                             className='FormIdentify__input'
                             {...props.getFieldProps('password')}

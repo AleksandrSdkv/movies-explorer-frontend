@@ -6,7 +6,7 @@
     border-bottom: 1px solid #AAAAAA;
     padding: 0 0 83px;
     justify-content: space-between;
-    margin: 0 70px 80px 70px;
+    margin: 80px 70px 80px 70px;
 }
 
 @media screen and (max-width: 768px) {

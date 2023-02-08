@@ -1,13 +1,16 @@
-import React from 'react';
 import FormIdentify from '../FormIdentify/FormIdentify';
 import './Register.css';
 import { Link } from 'react-router-dom';
 import { Formik, Form, } from "formik";
 import SchemaForRegister from '../../validation/validSchema';
+import { useAuth } from '../../hook/useAuth';
 
 const Register = () => {
+    const { handleRegister } = useAuth();
     const onSubmit = (values, submitProps) => {
-        console.log(values)
+        const { username, email, password } = values;
+        console.log(password)
+        handleRegister(username, email, password)
         submitProps.resetForm()
     }
     return (
