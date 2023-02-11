@@ -1,29 +1,33 @@
 import React from 'react';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
 import SearchForm from '../Movies/SearchForm/SearchForm';
-import MoreMovies from '../Movies/MoreMovies/MoreMovies'
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Preloader from '../Preloader/Preloader'
-import { useState } from 'react';
+import { useAuth } from '../../hook/useAuth';
+
 function SavedMovies() {
-    const [preloader, setPreloader] = useState(false);
-
-
-
+    const { filter, renderedCards, noMovies, isFailConnect, preloader } = useAuth();
+    const savedCards = renderedCards.filter((item) => {
+        return item.saved === true
+    });
 
     return (
         <>
             <Header />
-            <SearchForm />
+            <SearchForm
+                filter={filter}
+            />
             <main className='Movies'>
-                <MoviesCardList />
-                <MoreMovies />
+                <MoviesCardList
+                    films={savedCards}
+                    noMovies={noMovies}
+                    isFailConnect={isFailConnect}
+                />
             </main>
-            <Footer />
             {preloader && <Preloader />}
+            <Footer />
         </>
     )
 }
-
 export default SavedMovies; 

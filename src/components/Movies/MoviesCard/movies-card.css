@@ -98,7 +98,7 @@
             transition: opacity .3s;
         }
         
-        #movies-card__like_active {
+        .movies-card__like_active {
             background-image: url(../../../images/like.svg);
             width: 10px;
             height: 8.5px;

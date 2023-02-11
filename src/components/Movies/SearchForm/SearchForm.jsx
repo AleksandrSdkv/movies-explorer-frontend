@@ -10,13 +10,13 @@ function SearchForm({ filter }) {
 
 
     const onSubmit = (values) => {
-        localStorage.setItem('valueSubmit', values.filmName)
-        setStateInput(values.filmName)
-        filter(values.filmName, values.acceptedTerms)
+        localStorage.setItem('valueSubmit', values.filmName);
+        setStateInput(values.filmName);
+        filter(values.filmName, values.acceptedTerms);
     }
 
     const handleChange = (values) => {
-        localStorage.setItem('valueCheck', values.target.checked)
+        localStorage.setItem('valueCheck', values.target.checked);
         if (stateInput.length !== 0) {
             filter(stateInput, values.target.checked)
         }

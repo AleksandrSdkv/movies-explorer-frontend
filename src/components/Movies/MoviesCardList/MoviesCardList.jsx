@@ -5,9 +5,9 @@ import './movies-card-list.css';
 import MoreMovies from '../MoreMovies/MoreMovies'
 
 function MoviesCardList({ films, noMovies, isFailConnect }) {
-    const [more, setMore] = useState(0)
+    const [more, setMore] = useState(0);
 
-    const [hiddenBtn, setHiddenBtn] = useState(false)
+    const [hiddenBtn, setHiddenBtn] = useState(false);
     const showMovies = () => {
         const counter = { init: 12, more: 3 };
 
@@ -21,14 +21,14 @@ function MoviesCardList({ films, noMovies, isFailConnect }) {
         }
         return counter;
     };
-    let displayMovies = showMovies()
+    let displayMovies = showMovies();
 
     const showMore = () => {
         const hiddenShowBtn = displayMovies.init + more;
         if (hiddenShowBtn > films.length) {
-            setHiddenBtn(true)
+            setHiddenBtn(true);
         }
-        setMore(more + displayMovies.more)
+        setMore(more + displayMovies.more);
     }
 
     return (
