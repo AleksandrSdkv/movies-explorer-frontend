@@ -2,32 +2,30 @@ import './Profile.css'
 import Header from '../Header/Header';
 import { Formik, Field, Form } from "formik";
 import { useAuth } from '../../hook/useAuth';
+import { SchemaForProfile } from '../../validation/SchemaForProfile'
 
 function Profile() {
-    const { userData, handleUpdateUser } = useAuth();
+    const { userData, handleUpdateUser, signOut } = useAuth();
     const { name, email } = userData;
-    console.log(name)
-    // console.log(setUserData())
+
     const onSubmit = (values) => {
-
-        console.log(values)
-
         handleUpdateUser(values);
     }
 
+    const handlerLogOut = () => {
+        signOut();
+    }
     return (<>
         <Header />
-
         <Formik
-
             initialValues={{
                 username: name,
-                email: email,
+                email: email
             }}
-            // validationSchema={SchemaForLogin}
+            validationSchema={SchemaForProfile}
             onSubmit={onSubmit}
         >
-            {props => (
+            {({ errors, touched, isValid }) => (
                 <div className="Profile">
                     <Form className='Profile__form' >
                         <fieldset className='Profile__fieldset'>
@@ -36,14 +34,20 @@ function Profile() {
                                 Имя
                                 <Field className='Profile__input' type="text" name='username' />
                             </label>
-
+                            <span className='Profile__input-error'>
+                                {errors.username &&
+                                    touched.username && <div className="Profile__input-error">{errors.username}</div>}
+                            </span>
                             <label className='Profile__label'>
                                 E-mail
                                 <Field className='Profile__input' type="email" name='email' />
-
                             </label>
-                            <button type='submit' disabled={!props.isValid} className={'Profile__input-btn'}>Редактировать</button>
-                            <button className='Profile__out-btn' type='button'>Выйти из аккаунта</button>
+                            <span className='Profile__input-error'>
+                                {errors.email &&
+                                    touched.email && <div className="Profile__input-error">{errors.email}</div>}
+                            </span>
+                            <button type='submit' disabled={!isValid} className={'Profile__input-btn'}>Редактировать</button>
+                            <button onClick={handlerLogOut} className='Profile__out-btn' type='button'>Выйти из аккаунта</button>
                         </fieldset>
                     </Form>
                 </div>

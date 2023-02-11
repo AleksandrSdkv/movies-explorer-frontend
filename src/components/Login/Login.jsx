@@ -11,7 +11,7 @@ function Login() {
     const onSubmit = (values, submitProps) => {
         const { email, password } = values;
         handleLogin(email, password);
-        submitProps.resetForm()
+        submitProps.resetForm();
     }
     return (
         <main className="Login">

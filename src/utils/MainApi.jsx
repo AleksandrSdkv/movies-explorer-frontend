@@ -1,5 +1,4 @@
-const BASE_URL = 'http://localhost:3001';
-// {"data":{"name":"Aleksandr","email":"Pegas2697@yandex.ru","_id":"63e16e7640cc1f8c884fdf92"}}
+const BASE_URL = 'http://localhost:3001/';
 
 const mainApi = ({
     method = 'POST',
@@ -7,6 +6,7 @@ const mainApi = ({
     token,
     data
 }) => {
+
     return fetch(`${BASE_URL}${url}`,
         {
             method,
@@ -23,34 +23,33 @@ const mainApi = ({
     });
 }
 
-export const getUserInfo = () => {
+export const getUserInfo = (token) => {
     return mainApi({
-        url: '/users/me',
+        url: 'users/me',
         method: 'GET',
-
+        token
     })
 }
 
-export const setUserInfo = (email, name) => {
-    console.log(email, name)
+export const setUserInfo = (email, name, token) => {
     return mainApi({
         method: 'PATCH',
-        url: '/users/me',
-        data: { email, name }
+        url: 'users/me',
+        data: { email, name },
+        token
     })
 }
 
 export const register = (name, email, password) => {
     return mainApi({
-        url: '/signup',
+        url: 'signup',
         data: { name, email, password }
     });
 }
 
-
 export const login = (email, password) => {
     return mainApi({
-        url: '/signin',
+        url: 'signin',
         data: { email, password }
     })
 }
@@ -59,5 +58,31 @@ export const checkTokenValid = (token) => {
     return mainApi({
         token,
         method: 'GET',
+        url: 'users/me',
     })
 }
+
+export const changeLikeCardStatus = (card, token) => {
+    if (card._id) {
+        return mainApi({
+            token,
+            url: `movies/${card._id}`,
+            method: 'DELETE'
+        })
+    } else {
+        return mainApi({
+            token,
+            url: 'movies',
+            data: { ...card }
+        })
+    }
+}
+
+export const getSaveCards = (token) => {
+    return mainApi({
+        method: 'GET',
+        token,
+        url: 'movies'
+    })
+}
+

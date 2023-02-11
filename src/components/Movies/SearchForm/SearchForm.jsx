@@ -1,26 +1,21 @@
 import './searchform.css';
 import { Formik, Field, Form, useField } from "formik";
-import * as Yup from 'yup'
+import { SchemaForSearch } from '../../../validation/SchemaForSearch';
 import { useState } from 'react';
 
 function SearchForm({ filter }) {
     const [stateInput, setStateInput] = useState('');
     const valueCheckBox = localStorage.getItem('valueCheck') === 'true';
     const valueInput = localStorage.getItem('valueSubmit');
-    const SchemaForLogin = Yup.object().shape({
-        filmName: Yup.string()
-            .required("Пожжалуйста, введите ключевое слово"),
-    });
+
 
     const onSubmit = (values) => {
         localStorage.setItem('valueSubmit', values.filmName)
-
         setStateInput(values.filmName)
         filter(values.filmName, values.acceptedTerms)
     }
 
     const handleChange = (values) => {
-
         localStorage.setItem('valueCheck', values.target.checked)
         if (stateInput.length !== 0) {
             filter(stateInput, values.target.checked)
@@ -29,7 +24,6 @@ function SearchForm({ filter }) {
 
     const CheckBox = ({ children, ...props }) => {
         const [field] = useField({ ...props, type: 'checkbox' });
-
         return (
             <label className="searchform__toggle">
                 <input className="searchform__toggle-checkbox" type="checkbox"{...field} {...props} onClick={handleChange} />
@@ -44,7 +38,7 @@ function SearchForm({ filter }) {
                 filmName: valueInput || '',
                 acceptedTerms: valueCheckBox || false
             }}
-            validationSchema={SchemaForLogin}
+            validationSchema={SchemaForSearch}
             onSubmit={onSubmit}
             onChange={(e, event) => {
                 handleChange({ ...event, target: { name: 'acceptedTerms', value: e } })

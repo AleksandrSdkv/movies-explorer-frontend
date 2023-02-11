@@ -1,4 +1,3 @@
-
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Main from '../Main/Main';
@@ -12,12 +11,6 @@ import ProtectedRoute from '../HOC/ProtectedRoute';
 
 import { AuthProvider } from '../HOC/AuthProvaider';
 export default function App() {
-
-  // const [currentUser, setCurrentUser] = useState({});
-
-
-
-
 
   return (
     <AuthProvider>

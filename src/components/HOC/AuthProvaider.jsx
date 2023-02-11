@@ -5,7 +5,7 @@ export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(false);
-    const [userData, setUserData] = useState({ email: '', username: '' });
+    const [userData, setUserData] = useState({ _id: '', name: '', email: '' });
 
     const history = useNavigate();
 
@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('token', data.token);
             checkToken();
             setLoggedIn(true);
-            setUserData({ email, password })
+            setUserData({ email, password });
             history('/movies');
         }).catch((err) => {
             console.log(`Произошла ошибка. ${err}`);
@@ -31,23 +31,20 @@ export const AuthProvider = ({ children }) => {
     }
 
     const checkToken = () => {
-        const token = localStorage.getItem('token');
+
+        const token = localStorage.getItem('token')
         if (!token) return;
-        mainApi.checkTokenValid(token)
         if (token) {
-            mainApi.getUserInfo()
+            mainApi.checkTokenValid(token)
+            mainApi.getUserInfo(token)
                 .then((user) => {
                     if (user && user.data) {
-                        setLoggedIn(true);
-                        setUserData({
-                            email: user.data.email,
-                            name: user.data.name
-                        })
-                        history('/movies')
+                        setLoggedIn(true);;
+                        setUserData(user.data);
+                        history('/movies');
                     } else {
                         setLoggedIn(false);
                         history('/signin');
-
                     }
                 }).catch((err) => {
                     setLoggedIn(false);
@@ -58,22 +55,54 @@ export const AuthProvider = ({ children }) => {
     }
 
     const handleUpdateUser = (values) => {
+        const token = localStorage.getItem('token');
         const { email, username } = values;
-        console.log(email, username)
-        mainApi.setUserInfo(email, username)
-            .then((data) => {
-                setUserData(data)
+        mainApi.setUserInfo(email, username, token)
+            .then((user) => {
+                setUserData(user);
             })
             .catch((err) => {
                 console.log(err);
             })
     };
 
+    const signOut = () => {
+        setLoggedIn(false);
+        localStorage.removeItem('token');
+        history.push('/signin');
+    }
+    const handleCardLike = (card) => {
+        const token = localStorage.getItem('token');
+        const localFilm = JSON.parse(localStorage.getItem('valueFilm'))
+        if (card.saved === false) {
+            const film = {};
+            film.country = card.country;
+            film.director = card.director;
+            film.duration = card.duration;
+            film.year = card.year;
+            film.description = card.description;
+            film.image = `https://api.nomoreparties.co/${card.image.url}`;
+            film.trailerLink = card.trailerLink;
+            film.thumbnail = `https://api.nomoreparties.co/${card.image.url}`;
+            film.movieId = card.id;
+            film.nameRU = card.nameRU;
+            film.nameEN = card.nameEN;
+
+
+
+            mainApi.changeLikeCardStatus(film, token);
+
+        } else {
+
+            mainApi.changeLikeCardStatus(card, token);
+        }
+    }
+
     useEffect(() => {
         checkToken();
 
     }, []);
-    const value = { userData, handleRegister, handleLogin, loggedIn, handleUpdateUser }
+    const value = { userData, handleRegister, handleLogin, loggedIn, handleUpdateUser, signOut, handleCardLike }
 
     return (<AuthContext.Provider value={value}>
         {children}

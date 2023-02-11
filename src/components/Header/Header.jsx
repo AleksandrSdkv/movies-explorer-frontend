@@ -2,28 +2,27 @@ import { useState, useEffect } from 'react';
 import './Header.css';
 import './Header__profile.css';
 import '../delete-button/_type/delete-button_type_nav.css'
-import { Link, useLocation  } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Navigation from '../Navigation/Navigation';
-
+import { useAuth } from '../../hook/useAuth';
 
 function Header() {
     const [isNavBarOpen, setIsNavBarOpen] = useState(false);
-
-
     const [buttonMenu, setButtonMenu] = useState('delete-button_type_nav-close');
     const [isChangeMenu, setIsChangeMenu] = useState('header__nav_hidden');
-
+    const { loggedIn } = useAuth();
 
     function handleBurgerClick() {
-        setIsNavBarOpen(!isNavBarOpen)
+        setIsNavBarOpen(!isNavBarOpen);
     }
+
     useEffect(() => {
         if (isNavBarOpen) {
-            setIsChangeMenu('Header__menu_nav')
+            setIsChangeMenu('Header__menu_nav');
             setButtonMenu("delete-button_type_nav");
 
         } else {
-            setIsChangeMenu('header__nav_hidden')
+            setIsChangeMenu('header__nav_hidden');
             setButtonMenu('delete-button_type_nav-close');
 
         }
@@ -32,13 +31,12 @@ function Header() {
     return (
         <>
             {
-                location.pathname === '/' ?
+                location.pathname === '/' && !loggedIn ?
 
                     <header className='Header'>
                         <div className='Header__logo' />
                         <div className='Header__auth'>
                             <Link to="/signup" className='Header__text Header__sign-in'>Регистрация</Link>
-
                             <Link to="/signin" className='Header__text Header__text-sign-up'>Войти</Link>
                         </div>
                     </header>
@@ -53,9 +51,7 @@ function Header() {
                             <div className='Header__profile-svg'>
                                 <div className='Header__profile-svg-svg'></div>
                             </div>
-
                         </div>
-
 
                         <nav className={isChangeMenu}>
                             <button className={buttonMenu} onClick={handleBurgerClick}>
@@ -77,7 +73,6 @@ function Header() {
                         </nav>
                         <button className={'Header__nav-bar'} onClick={handleBurgerClick}></button>
                     </header>
-
             }
         </>
     )

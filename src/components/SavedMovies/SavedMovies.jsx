@@ -8,6 +8,10 @@ import Preloader from '../Preloader/Preloader'
 import { useState } from 'react';
 function SavedMovies() {
     const [preloader, setPreloader] = useState(false);
+
+
+
+
     return (
         <>
             <Header />
