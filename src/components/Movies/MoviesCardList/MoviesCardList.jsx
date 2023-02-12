@@ -1,27 +1,15 @@
 import { useState } from 'react';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import './movies-card-list.css';
-
+import * as constants from '../../../constants/constants';
 import MoreMovies from '../MoreMovies/MoreMovies'
 
 function MoviesCardList({ films, noMovies, isFailConnect }) {
     const [more, setMore] = useState(0);
 
     const [hiddenBtn, setHiddenBtn] = useState(false);
-    const showMovies = () => {
-        const counter = { init: 12, more: 3 };
 
-        if (window.innerWidth < 1040) {
-            counter.init = 8;
-            counter.more = 2;
-        }
-        if (window.innerWidth < 481) {
-            counter.init = 5;
-            counter.more = 1;
-        }
-        return counter;
-    };
-    let displayMovies = showMovies();
+    let displayMovies = constants.showMovies();
 
     const showMore = () => {
         const hiddenShowBtn = displayMovies.init + more;

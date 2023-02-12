@@ -3,17 +3,20 @@ import Header from '../Header/Header';
 import { Formik, Field, Form } from "formik";
 import { useAuth } from '../../hook/useAuth';
 import { SchemaForProfile } from '../../validation/SchemaForProfile'
-
+import { useState } from 'react';
 function Profile() {
     const { userData, handleUpdateUser, signOut } = useAuth();
     const { name, email } = userData;
-
+    const [success, setSuccess] = useState('Profile__success_hidden');
     const onSubmit = (values) => {
-        handleUpdateUser(values);
+        handleUpdateUser(values, app);
     }
 
     const handlerLogOut = () => {
         signOut();
+    }
+    const app = () => {
+        setSuccess('Profile__success_visible');
     }
     return (<>
         <Header />
@@ -47,6 +50,7 @@ function Profile() {
                                     touched.email && <div className="Profile__input-error">{errors.email}</div>}
                             </span>
                             <button type='submit' disabled={!isValid} className={'Profile__input-btn'}>Редактировать</button>
+                            <span className={success}>Данные успешно обновленны!</span>
                             <button onClick={handlerLogOut} className='Profile__out-btn' type='button'>Выйти из аккаунта</button>
                         </fieldset>
                     </Form>

@@ -4,7 +4,6 @@ import { useAuth } from '../../hook/useAuth';
 
 const ProtectedRoute = ({ children }) => {
     const { loggedIn } = useAuth();
-
     return (
         loggedIn ? children : < Navigate to="/signin" replace />
     )

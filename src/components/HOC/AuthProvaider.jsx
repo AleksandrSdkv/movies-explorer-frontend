@@ -1,11 +1,14 @@
 import { createContext, useState, useEffect } from "react";
 import * as mainApi from '../../utils/MainApi';
+import * as constants from '../../constants/constants';
 import { moviesApi } from '../../utils/MoviesApi';
 import { useNavigate } from 'react-router-dom';
+import Preloader from '../Preloader/Preloader';
+
 export const AuthContext = createContext(null);
 
-
 export const AuthProvider = ({ children }) => {
+    const token = constants.token;
     const [loggedIn, setLoggedIn] = useState(false);
     const [userData, setUserData] = useState({ _id: '', name: '', email: '' });
     const [films, setFilms] = useState([]);
@@ -13,7 +16,7 @@ export const AuthProvider = ({ children }) => {
     const [preloader, setPreloader] = useState(false);
     const [noMovies, setNoMovies] = useState(false);
     const [isFailConnect, setIsFailConnect] = useState(false);
-
+    const [loading, setLoading] = useState(true);
     const history = useNavigate();
 
     const handleRegister = (name, email, password) => {
@@ -38,7 +41,11 @@ export const AuthProvider = ({ children }) => {
     }
 
     const checkToken = () => {
-        const token = localStorage.getItem('token');
+        const localMovies = JSON.parse(localStorage.getItem('saveLocal') || '[]');
+        if (localStorage.getItem('saveLocal') !== null) {
+            setRenderedCards(localMovies)
+        }
+
         if (!token) return;
         if (token) {
             mainApi.checkTokenValid(token);
@@ -47,7 +54,7 @@ export const AuthProvider = ({ children }) => {
                     if (user && user.data) {
                         setLoggedIn(true);
                         setUserData(user.data);
-                        history('/movies');
+                        setLoading(false)
                     } else {
                         setLoggedIn(false);
                         history('/signin');
@@ -60,12 +67,13 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
-    const handleUpdateUser = (values) => {
-        const token = localStorage.getItem('token');
+    const handleUpdateUser = (values, app) => {
+
         const { email, username } = values;
         mainApi.setUserInfo(email, username, token)
             .then((user) => {
                 setUserData(user);
+                app();
             })
             .catch((err) => {
                 console.log(err);
@@ -78,7 +86,6 @@ export const AuthProvider = ({ children }) => {
         history.push('/signin');
     }
     const handleCardLike = (card) => {
-        const token = localStorage.getItem('token');
         if (card.saved === false) {
             const film = {};
             film.country = card.country;
@@ -92,23 +99,42 @@ export const AuthProvider = ({ children }) => {
             film.movieId = card.id;
             film.nameRU = card.nameRU;
             film.nameEN = card.nameEN;
-
-            mainApi.changeLikeCardStatus(film, token);
-            const newCard = card;
-            newCard.saved = true;
-            const cardsArray = [...renderedCards];
-            const index = cardsArray.findIndex(el => el.id === film.id);
-            cardsArray[index] = newCard;
-            setRenderedCards([...cardsArray]);
-        } else {
-            console.log(card)
-            mainApi.changeLikeCardStatus(card, token);
+            mainApi.changeLikeCardStatus(film, token)
+                .then((serverCard) => {
+                    setRenderedCards((beatCards) => {
+                        const editedCards = beatCards.map(beatCard => {
+                            if (beatCard.id === serverCard.movieId) {
+                                beatCard.saved = true;
+                                beatCard._id = serverCard._id;
+                                beatCard.movieId = serverCard.movieId;
+                                beatCard.thumbnail = serverCard.thumbnail;
+                            }
+                            return beatCard;
+                        })
+                        localStorage.setItem('saveLocal', JSON.stringify(editedCards));
+                        return editedCards;
+                    })
+                    localStorage.removeItem('saveLocal');
+                })
+                .catch((err) => {
+                    console.error(err);
+                    setIsFailConnect(true);
+                });
+        }
+        else {
+            mainApi.changeLikeCardStatus(card, token)
+                .then(card => console.log(card))
+                .catch((err) => {
+                    console.error(err);
+                    setIsFailConnect(true);
+                });
             const newCard = card;
             newCard.saved = false;
             const cardsArray = [...renderedCards];
             const index = cardsArray.findIndex(el => el.id === card.id);
             cardsArray[index] = newCard;
             setRenderedCards([...cardsArray]);
+            localStorage.removeItem('saveLocal');
         }
     }
 
@@ -118,7 +144,6 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     useEffect(() => {
-        const token = localStorage.getItem('token');
         Promise.all([moviesApi.getMovies(), mainApi.getSaveCards(token)])
             .then(([movieApiCards, { data: localCards }]) => {
                 const allCards = movieApiCards.map(card => {
@@ -129,7 +154,6 @@ export const AuthProvider = ({ children }) => {
                     card.saved = localCard !== undefined;
                     return card;
                 });
-
                 setFilms(allCards);
             }).catch((err) => {
                 console.error(err);
@@ -137,6 +161,9 @@ export const AuthProvider = ({ children }) => {
             });
     }, [])
 
+    if (loading) {
+        return <Preloader />
+    }
 
     function filter(nameRU = '', isShorts) {
         setPreloader(true);
@@ -146,13 +173,13 @@ export const AuthProvider = ({ children }) => {
             }
             return films.nameRU.toLowerCase().includes(nameRU.toLowerCase());
         })
+        localStorage.setItem('saveLocal', JSON.stringify(film));
         setPreloader(false);
         setRenderedCards(film);
         setNoMovies(true);
     }
 
-
-    const value = { userData, renderedCards, isFailConnect, noMovies, preloader, loggedIn, handleRegister, handleLogin, handleUpdateUser, signOut, handleCardLike, filter }
+    const value = { userData, renderedCards, isFailConnect, noMovies, preloader, loggedIn, loading, handleRegister, handleLogin, handleUpdateUser, signOut, handleCardLike, filter }
 
     return (<AuthContext.Provider value={value}>
         {children}

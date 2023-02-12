@@ -8,7 +8,6 @@ function SearchForm({ filter }) {
     const valueCheckBox = localStorage.getItem('valueCheck') === 'true';
     const valueInput = localStorage.getItem('valueSubmit');
 
-
     const onSubmit = (values) => {
         localStorage.setItem('valueSubmit', values.filmName);
         setStateInput(values.filmName);
@@ -18,7 +17,7 @@ function SearchForm({ filter }) {
     const handleChange = (values) => {
         localStorage.setItem('valueCheck', values.target.checked);
         if (stateInput.length !== 0) {
-            filter(stateInput, values.target.checked)
+            filter(stateInput, values.target.checked);
         }
     }
 

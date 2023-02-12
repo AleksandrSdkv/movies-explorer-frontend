@@ -176,3 +176,14 @@
     font-size: 10px;
     line-height: 12px;
 }
+
+.Profile__success_visible {
+    color: rgb(31, 224, 118);
+    font-size: 12px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.Profile__success_hidden {
+    display: none;
+}

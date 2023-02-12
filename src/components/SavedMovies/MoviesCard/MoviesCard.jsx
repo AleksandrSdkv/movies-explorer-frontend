@@ -8,15 +8,12 @@ import '../../Movies/MoviesCard/movies-card.css';
 function MoviesCard({ film }) {
     const { handleCardLike } = useAuth();
     const url = `https://api.nomoreparties.co/${film.image.url}`;
-
     const hours = `${Math.floor(film.duration / 60) === 0 ? '0' : Math.floor(film.duration / 60)}.${Math.floor(film.duration % 60)}ч.`
     const isLiked = film.saved === true;
-
     const ClassButton = isLiked ? "movies-card__like_active" : "movies-card__like_inactive";
-
+    
     function handleLikeClick() {
         handleCardLike(film);
-
     }
 
     return (

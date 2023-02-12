@@ -9,7 +9,7 @@ import { useAuth } from '../../hook/useAuth';
 function SavedMovies() {
     const { filter, renderedCards, noMovies, isFailConnect, preloader } = useAuth();
     const savedCards = renderedCards.filter((item) => {
-        return item.saved === true
+        return item.saved === true;
     });
 
     return (
