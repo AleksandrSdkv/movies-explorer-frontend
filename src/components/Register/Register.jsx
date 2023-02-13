@@ -1,30 +1,64 @@
-import React from 'react';
 import FormIdentify from '../FormIdentify/FormIdentify';
 import './Register.css';
-import { Field } from "formik";
+import { Link } from 'react-router-dom';
+import { Formik, Form, } from "formik";
+import SchemaForRegister from '../../validation/validSchema';
+import { useAuth } from '../../hook/useAuth';
 
-function Register() {
+const Register = () => {
+    const { handleRegister } = useAuth();
+    const onSubmit = (values, submitProps) => {
+        const { username, email, password } = values;
+        console.log(password)
+        handleRegister(username, email, password)
+        submitProps.resetForm()
+    }
     return (
-        <div className="Register">
-
-
-
-            <FormIdentify
-                link='/signin'
-                linkText='Уже зарегистрированы?'
-                moveText='Войти'
-                btn='Зарегистрироваться'
-                headerText='Добро пожаловать!'
-                error="-t"
+        <main className="Register">
+            <Formik
+                initialValues={{
+                    username: '',
+                    email: '',
+                    password: '',
+                }}
+                validationSchema={SchemaForRegister}
+                onSubmit={onSubmit}
             >
-                <label className='FormIdentify__label'><p className='FormIdentify__label-text'> Имя</p>
-                    <Field className='FormIdentify__input' type="text" name="username" placeholder="Username" />
+                {props => (
 
-                </label>
-            </FormIdentify>
-
-        </div >
-    )
-}
-
+                    <Form className='FormIdentify__form' >
+                        <div className='Register__header'>
+                            <Link to='/' > <div className='Register__logo'></div> </Link> <h1 className='Register__header-text'>Добро пожаловать!</h1></div>
+                        <FormIdentify
+                            label="Имя"
+                            name="username"
+                            type="text"
+                            placeholder="Введите имя"
+                            className='FormIdentify__input'
+                            {...props.getFieldProps('username')}
+                        />
+                        <FormIdentify
+                            label="E-mail"
+                            name="email"
+                            type="email"
+                            placeholder="Введите почту"
+                            className='FormIdentify__input'
+                            {...props.getFieldProps('email')}
+                        />
+                        <FormIdentify
+                            label="Пароль"
+                            name="password"
+                            type="password"
+                            placeholder="Введите пароль"
+                            className='FormIdentify__input'
+                            {...props.getFieldProps('password')}
+                        />
+                        <button type='submit' disabled={!props.isValid} className={!(props.dirty && props.isValid) ? `${'FormIdentify__button_inactive'}` : `${'FormIdentify__button'}`}>Зарегистрироваться</button>
+                        <Link to='/signin' className="FormIdentify__link-text">Уже зарегистрированы? <p className="FormIdentify__move-text">Войти</p> </Link>
+                    </Form>
+                )}
+            </Formik>
+        </main >
+    );
+};
 export default Register;

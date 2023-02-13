@@ -33,7 +33,7 @@
 .Profile {
     border: none;
     display: flex;
-    max-width: 410px;
+    width: 410px;
     flex-direction: column;
     margin: auto;
     align-content: space-between;
@@ -92,8 +92,8 @@
     line-height: 15px;
     align-items: flex-end;
     justify-content: space-evenly;
-    margin-bottom: 220px;
     font-weight: 500;
+    padding-bottom: 16px;
 }
 
 @media screen and (max-width: 768px) {
@@ -129,12 +129,13 @@
 .Profile__label-name {
     border-bottom: 1px solid #E8E8E8;
     padding-bottom: 16px;
-    margin-bottom: 17px;
+    margin-bottom: 0;
 }
 
 .Profile__input-btn {
     border: none;
     margin-bottom: 16px;
+    margin-top: 220px;
     background-color: #FFFFFF;
     font-size: 13px;
     line-height: 16px;
@@ -164,4 +165,25 @@
         font-size: 12px;
         line-height: 15px;
     }
+}
+
+.Profile__input-error {
+    margin-right: auto;
+    margin-bottom: 17px;
+    height: 18px;
+    color: #EE3465;
+    font-weight: 400;
+    font-size: 10px;
+    line-height: 12px;
+}
+
+.Profile__success_visible {
+    color: rgb(31, 224, 118);
+    font-size: 12px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.Profile__success_hidden {
+    display: none;
 }

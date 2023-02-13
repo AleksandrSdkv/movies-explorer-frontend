@@ -29,7 +29,7 @@
         }
         
         .movies-card__name {
-            max-width: 218px;
+            max-width: 211px;
             height: 48px;
             margin: 0;
             font-weight: 500;
@@ -39,9 +39,15 @@
             text-overflow: ellipsis;
         }
         
-        @media screen and (max-width: 768px) {
+        @media screen and (max-width: 990px) {
             .movies-card__name {
-                max-width: 270px;
+                max-width: 180px;
+            }
+        }
+        
+        @media screen and (max-width: 790px) {
+            .movies-card__name {
+                max-width: 170px;
             }
         }
         
@@ -92,7 +98,7 @@
             transition: opacity .3s;
         }
         
-        #movies-card__like_active {
+        .movies-card__like_active {
             background-image: url(../../../images/like.svg);
             width: 10px;
             height: 8.5px;

@@ -9,7 +9,7 @@ ____
 
 ### https://github.com/AleksandrSdkv/movies-explorer-frontend/pull/2 Pull request
 
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Open [http://sadykov-project.nomoredomains.work/movies](http://sadykov-project.nomoredomains.work/movies) to view it in your browser.
 
 #### Ссылка https://github.com/AleksandrSdkv/movies-explorer-frontend.git
 

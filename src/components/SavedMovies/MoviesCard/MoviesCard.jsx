@@ -1,22 +1,36 @@
 import React from 'react';
 
-import '../../delete-button/_type/delete-button_type_movie.css';
+import { useAuth } from '../../../hook/useAuth';
 
-function MoviesCard(props) {
-    const { card } = props;
+import '../../Movies/MoviesCard/movies-card.css';
 
-    return (<>
-        <picture className="movies-card__group">
-            <img className='movies-card__mask movies-card__text' src={card.image} alt="" />
-            <div className='movies-card__container'>
-                <p className="movies-card__name movies-card__text">{card.name}</p>
-                <button type="button" className='delete-button_type_movie' >
-                    <div className='delete-button_type_movie-svg' ></div>
-                </button>
-            </div>
-            <p className="movies-card__time movies-card__text">{card.time}</p>
-        </picture >
-    </>
+
+function MoviesCard({ film }) {
+    const { handleCardLike } = useAuth();
+    const url = `https://api.nomoreparties.co/${film.image.url}`;
+    const hours = `${Math.floor(film.duration / 60) === 0 ? '0' : Math.floor(film.duration / 60)}.${Math.floor(film.duration % 60)}ч.`
+    const isLiked = film.saved === true;
+    const ClassButton = isLiked ? "movies-card__like_active" : "movies-card__like_inactive";
+    
+    function handleLikeClick() {
+        handleCardLike(film);
+    }
+
+    return (
+        <>
+            <li className="movies-card__group">
+                <a href={film.trailerLink} target="_blank" rel="noreferrer">
+                    <img className='movies-card__mask movies-card__text' src={url} alt={film.nameRU} />
+                </a>
+                <div className='movies-card__container'>
+                    <p className="movies-card__name movies-card__text">{film.nameRU}</p>
+                    <button type="button" onClick={() => handleLikeClick()} className='movies-card__like-button' >
+                        <div className={ClassButton}></div>
+                    </button>
+                </div>
+                <p className="movies-card__time movies-card__text">{hours}</p>
+            </li >
+        </>
     )
 }
 
