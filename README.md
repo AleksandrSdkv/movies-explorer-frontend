@@ -7,7 +7,7 @@ ____
 
 ____
 
-### Как запустить проект: `npm start`
+### https://github.com/AleksandrSdkv/movies-explorer-frontend/pull/2 Pull request
 
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
