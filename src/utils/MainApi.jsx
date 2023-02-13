@@ -1,4 +1,4 @@
-const BASE_URL = 'movies-project.nomoredomains.club/';
+const BASE_URL = 'https://movies-project.nomoredomains.club/';
 
 const mainApi = ({
     method = 'POST',
