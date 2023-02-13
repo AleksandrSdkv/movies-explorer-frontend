@@ -3,8 +3,6 @@ import * as mainApi from '../../utils/MainApi';
 import * as constants from '../../constants/constants';
 import { moviesApi } from '../../utils/MoviesApi';
 import { useNavigate } from 'react-router-dom';
-import Preloader from '../Preloader/Preloader';
-
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
@@ -16,12 +14,12 @@ export const AuthProvider = ({ children }) => {
     const [preloader, setPreloader] = useState(false);
     const [noMovies, setNoMovies] = useState(false);
     const [isFailConnect, setIsFailConnect] = useState(false);
-    const [loading, setLoading] = useState(true);
+
     const history = useNavigate();
 
     const handleRegister = (name, email, password) => {
         return mainApi.register(name, email, password).then(() => {
-            history.push('/signin');
+            history('/signin');
         }).catch((err) => {
             console.log(`При регистрации произошла ошибка. ${err}`);
         });
@@ -45,7 +43,6 @@ export const AuthProvider = ({ children }) => {
         if (localStorage.getItem('saveLocal') !== null) {
             setRenderedCards(localMovies)
         }
-
         if (!token) return;
         if (token) {
             mainApi.checkTokenValid(token);
@@ -54,7 +51,7 @@ export const AuthProvider = ({ children }) => {
                     if (user && user.data) {
                         setLoggedIn(true);
                         setUserData(user.data);
-                        setLoading(false)
+                        history('/movies');
                     } else {
                         setLoggedIn(false);
                         history('/signin');
@@ -68,7 +65,6 @@ export const AuthProvider = ({ children }) => {
     }
 
     const handleUpdateUser = (values, app) => {
-
         const { email, username } = values;
         mainApi.setUserInfo(email, username, token)
             .then((user) => {
@@ -84,6 +80,7 @@ export const AuthProvider = ({ children }) => {
         setLoggedIn(false);
         localStorage.removeItem('token');
         history.push('/signin');
+        localStorage.removeItem('saveLocal');
     }
     const handleCardLike = (card) => {
         if (card.saved === false) {
@@ -161,9 +158,7 @@ export const AuthProvider = ({ children }) => {
             });
     }, [])
 
-    if (loading) {
-        return <Preloader />
-    }
+
 
     function filter(nameRU = '', isShorts) {
         setPreloader(true);
@@ -179,7 +174,7 @@ export const AuthProvider = ({ children }) => {
         setNoMovies(true);
     }
 
-    const value = { userData, renderedCards, isFailConnect, noMovies, preloader, loggedIn, loading, handleRegister, handleLogin, handleUpdateUser, signOut, handleCardLike, filter }
+    const value = { userData, renderedCards, isFailConnect, noMovies, preloader, loggedIn, handleRegister, handleLogin, handleUpdateUser, signOut, handleCardLike, filter }
 
     return (<AuthContext.Provider value={value}>
         {children}

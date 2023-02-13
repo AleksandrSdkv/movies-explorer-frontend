@@ -48,7 +48,7 @@ const Register = () => {
                         <FormIdentify
                             label="Пароль"
                             name="password"
-                            type="text"
+                            type="password"
                             placeholder="Введите пароль"
                             className='FormIdentify__input'
                             {...props.getFieldProps('password')}

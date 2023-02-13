@@ -8,6 +8,7 @@ import { useAuth } from '../../hook/useAuth';
 
 function Movies() {
     const { filter, renderedCards, noMovies, isFailConnect, preloader } = useAuth();
+
     return (<>
         <Header />
         <SearchForm

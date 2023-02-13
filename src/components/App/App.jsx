@@ -11,7 +11,7 @@ import ProtectedRoute from '../HOC/ProtectedRoute';
 
 import { AuthProvider } from '../HOC/AuthProvaider';
 export default function App() {
-
+ 
   return (
     <AuthProvider>
       <Routes>
@@ -19,6 +19,7 @@ export default function App() {
         />} />
 
         <Route path="/signin" element={<Login
+
         />} />
 
         <Route path="/movies" element={
