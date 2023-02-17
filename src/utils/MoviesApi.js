@@ -1,7 +1,5 @@
 const urlMoviesApi = 'https://api.nomoreparties.co/beatfilm-movies'; //записываем бэк
 
-
-
 class MoviesApi {
     constructor() {
         this._url = urlMoviesApi;

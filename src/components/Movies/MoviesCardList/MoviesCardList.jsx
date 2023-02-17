@@ -4,7 +4,7 @@ import './movies-card-list.css';
 import * as constants from '../../../constants/constants';
 import MoreMovies from '../MoreMovies/MoreMovies'
 
-function MoviesCardList({ films, noMovies, isFailConnect }) {
+function MoviesCardList({ films, noMovies, isFailConnect, handleCardLike }) {
     const [more, setMore] = useState(0);
 
     const [hiddenBtn, setHiddenBtn] = useState(false);
@@ -25,7 +25,7 @@ function MoviesCardList({ films, noMovies, isFailConnect }) {
             <ul className="movies-card-list__list" >
 
                 {films.map((item, index) =>
-                    index < displayMovies.init + more && < MoviesCard key={item.id} film={item} />
+                    index < displayMovies.init + more && < MoviesCard key={item.id} film={item} handleCardLike={handleCardLike} />
                 )}
 
             </ul>

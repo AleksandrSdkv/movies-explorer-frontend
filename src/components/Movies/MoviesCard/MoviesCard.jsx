@@ -1,9 +1,7 @@
 import React from 'react';
-import { useAuth } from '../../../hook/useAuth';
 import './movies-card.css';
 
-function MoviesCard({ film }) {
-    const { handleCardLike } = useAuth();
+function MoviesCard({ film, handleCardLike }) {
     const url = `https://api.nomoreparties.co/${film.image.url}`;
     const hours = `${Math.floor(film.duration / 60) === 0 ? '0' : Math.floor(film.duration / 60)}.${Math.floor(film.duration % 60)}ч.`
     const isLiked = film.saved === true;

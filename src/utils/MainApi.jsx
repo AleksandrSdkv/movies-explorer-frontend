@@ -60,8 +60,17 @@ export const checkTokenValid = (token) => {
         url: 'users/me',
     })
 }
+export const changeDelete = (id, token) => {
+    console.log(id)
+    return mainApi({
+        token,
+        url: `movies/${id}`,
+        method: 'DELETE'
+    })
 
+}
 export const changeLikeCardStatus = (card, token) => {
+
     if (card._id) {
         return mainApi({
             token,

@@ -2,20 +2,28 @@ import './searchform.css';
 import { Formik, Field, Form, useField } from "formik";
 import { SchemaForSearch } from '../../../validation/SchemaForSearch';
 import { useState } from 'react';
+import { useAuth } from '../../../hook/useAuth';
 
 function SearchForm({ filter }) {
+    const { location } = useAuth();
     const [stateInput, setStateInput] = useState('');
-    const valueCheckBox = localStorage.getItem('valueCheck') === 'true';
-    const valueInput = localStorage.getItem('valueSubmit');
+    const valueCheckBox = location.pathname === '/movies' && localStorage.getItem('valueCheck') === 'true';
+    const valueInput = location.pathname === '/movies' && localStorage.getItem('valueSubmit');
 
     const onSubmit = (values) => {
-        localStorage.setItem('valueSubmit', values.filmName);
+        if (location.pathname === '/movies') {
+            localStorage.setItem('valueSubmit', values.filmName);
+        }
+
         setStateInput(values.filmName);
         filter(values.filmName, values.acceptedTerms);
     }
 
     const handleChange = (values) => {
-        localStorage.setItem('valueCheck', values.target.checked);
+        if (location.pathname === '/movies') {
+            localStorage.setItem('valueCheck', values.target.checked);
+        }
+
         if (stateInput.length !== 0) {
             filter(stateInput, values.target.checked);
         }

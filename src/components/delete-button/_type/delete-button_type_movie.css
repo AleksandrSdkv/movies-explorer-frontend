@@ -19,10 +19,9 @@
     background-repeat: no-repeat;
     margin: 4.5px 0px 6px 7px;
     transform: rotate(270deg);
-    opacity: 0;
 }
 
 .delete-button_type_movie-svg:hover {
-    opacity: 1;
+    opacity: .6;
     cursor: pointer;
 }
