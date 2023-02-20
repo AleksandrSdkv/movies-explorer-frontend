@@ -10,24 +10,29 @@ import * as mainApi from '../../utils/MainApi';
 import * as constants from '../../constants/constants';
 import { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
+import { useAuth } from '../../hook/useAuth';
+
+
 
 function Movies() {
+    const { renderedCard } = useAuth();
     const token = constants.token;
-    const [films, setFilms] = useState([]);
+    const [films, setFilms] = useState([...renderedCard]);
     const [renderedCards, setRenderedCards] = useState([]);
     const [preloader, setPreloader] = useState(false);
     const [isFailConnect, setIsFailConnect] = useState(false);
     const [noMovies, setNoMovies] = useState(false);
     const location = useLocation();
 
-
     useEffect(() => {
+        if (!token) return;
         const localMovies = JSON.parse(localStorage.getItem('saveLocal') || '[]');
         if (localStorage.getItem('saveLocal') !== null) {
             setRenderedCards(localMovies)
         }
         Promise.all([moviesApi.getMovies(), mainApi.getSaveCards(token)])
             .then(([movieApiCards, { data: localCards }]) => {
+                console.log(localCards)
                 const allCards = movieApiCards.map(card => {
                     const localCard = localCards.find((localCard) => localCard.movieId === card.id);
                     card._id = localCard !== undefined ? localCard._id : '';
@@ -43,6 +48,8 @@ function Movies() {
                 setIsFailConnect(true);
             });
     }, [])
+
+
 
     function filter(nameRU = '', isShorts) {
         setPreloader(true);
@@ -89,7 +96,7 @@ function Movies() {
                         localStorage.setItem('saveLocal', JSON.stringify(editedCards));
                         return editedCards;
                     })
-                    localStorage.removeItem('saveLocal');
+
                 })
                 .catch((err) => {
                     console.error(err);
@@ -97,21 +104,22 @@ function Movies() {
                 });
         }
         else {
-
             mainApi.changeLikeCardStatus(card, token)
-                .then(card => console.log(card))
-
+                .then(unlikeCard => {
+                    setRenderedCards(localCards => {
+                        const newArrayCards = localCards.map(card => {
+                            if (unlikeCard.movieId === card.id) {
+                                card.saved = false
+                            }
+                            return card
+                        })
+                        localStorage.setItem('saveLocal', JSON.stringify(newArrayCards));
+                        return newArrayCards
+                    })
+                })
                 .catch((err) => {
                     console.error(err);
-
                 });
-            const newCard = card;
-            newCard.saved = false;
-            const cardsArray = [...renderedCards];
-            const index = cardsArray.findIndex(el => el.id === card.id);
-            cardsArray[index] = newCard;
-            setRenderedCards([...cardsArray]);
-            localStorage.removeItem('saveLocal');
         }
     }
 

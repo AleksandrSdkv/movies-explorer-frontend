@@ -18,7 +18,7 @@ function MoviesCardList({ films, noMovies, isFailConnect, handleCardLike }) {
         }
         setMore(more + displayMovies.more);
     }
-
+    console.log(films)
     return (
         <>
             {noMovies && films.length === 0 && <p className='more-movie__nothing-search'>Ничего не найдено</p>}

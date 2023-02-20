@@ -1,4 +1,4 @@
-const BASE_URL = 'http://movies-project.nomoredomains.club/';
+const BASE_URL = 'http://localhost:3001/';
 
 const mainApi = ({
     method = 'POST',
@@ -6,6 +6,7 @@ const mainApi = ({
     token,
     data
 }) => {
+
     return fetch(`${BASE_URL}${url}`,
         {
             method,

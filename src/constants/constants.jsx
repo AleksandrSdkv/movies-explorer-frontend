@@ -1,4 +1,5 @@
 export const token = localStorage.getItem('token');
+
 export const showMovies = () => {
     const counter = { init: 12, more: 3 };
 

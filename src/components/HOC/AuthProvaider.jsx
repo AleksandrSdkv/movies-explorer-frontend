@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
     const token = constants.token;
     const [loggedIn, setLoggedIn] = useState(false);
     const [userData, setUserData] = useState({ _id: '', name: '', email: '' });
-    const [renderedCards, setRenderedCards] = useState([]);
+    const [renderedCard, setRenderedCards] = useState([]);
 
 
 
@@ -31,19 +31,14 @@ export const AuthProvider = ({ children }) => {
             checkToken();
             setLoggedIn(true);
             setUserData({ email, password });
-            history('/movies');
+            history('/');
         }).catch((err) => {
             console.log(`Произошла ошибка. ${err}`);
         });
     }
 
     const checkToken = () => {
-        if (location.pathname === '/movies') {
-            const localMovies = JSON.parse(localStorage.getItem('saveLocal') || '[]');
-            if (localStorage.getItem('saveLocal') !== null) {
-                setRenderedCards(localMovies)
-            }
-        }
+
         if (!token) return;
         if (token) {
             mainApi.checkTokenValid(token);
@@ -78,10 +73,12 @@ export const AuthProvider = ({ children }) => {
     };
 
     const signOut = () => {
+        setRenderedCards([])
+        mainApi.checkTokenValid('');
         setLoggedIn(false);
-        localStorage.removeItem('token');
-        localStorage.removeItem('saveLocal');
-        history.push('/signin');
+        localStorage.clear();
+        setUserData({ email: '', password: '' });
+        history('/signin');
 
     }
 
@@ -94,7 +91,7 @@ export const AuthProvider = ({ children }) => {
 
 
 
-    const value = { userData, renderedCards, loggedIn, handleRegister, handleLogin, handleUpdateUser, signOut, location }
+    const value = { userData, renderedCard, loggedIn, handleRegister, handleLogin, handleUpdateUser, signOut, location }
 
     return (<AuthContext.Provider value={value}>
         {children}
