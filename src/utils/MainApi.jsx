@@ -54,15 +54,14 @@ export const login = (email, password) => {
     })
 }
 
-export const checkTokenValid = (token) => {
-    return mainApi({
-        token,
-        method: 'GET',
-        url: 'users/me',
-    })
-}
+// export const checkTokenValid = (token) => {
+//     return mainApi({
+//         token,
+//         method: 'GET',
+//         url: 'users/me',
+//     })
+// }
 export const changeDelete = (id, token) => {
-    console.log(id)
     return mainApi({
         token,
         url: `movies/${id}`,
@@ -71,7 +70,6 @@ export const changeDelete = (id, token) => {
 
 }
 export const changeLikeCardStatus = (card, token) => {
-
     if (card._id) {
         return mainApi({
             token,

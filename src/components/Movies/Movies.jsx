@@ -4,35 +4,24 @@ import SearchForm from './SearchForm/SearchForm';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import Preloader from '../Preloader/Preloader';
-
 import { moviesApi } from '../../utils/MoviesApi';
 import * as mainApi from '../../utils/MainApi';
-import * as constants from '../../constants/constants';
 import { useState, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
-import { useAuth } from '../../hook/useAuth';
-
-
 
 function Movies() {
-    const { renderedCard } = useAuth();
-    const token = constants.token;
-    const [films, setFilms] = useState([...renderedCard]);
+    const token = localStorage.getItem('token');
+    const [films, setFilms] = useState([]);
     const [renderedCards, setRenderedCards] = useState([]);
     const [preloader, setPreloader] = useState(false);
     const [isFailConnect, setIsFailConnect] = useState(false);
     const [noMovies, setNoMovies] = useState(false);
-    const location = useLocation();
 
     useEffect(() => {
         if (!token) return;
-        const localMovies = JSON.parse(localStorage.getItem('saveLocal') || '[]');
-        if (localStorage.getItem('saveLocal') !== null) {
-            setRenderedCards(localMovies)
-        }
+        setRenderedCards(JSON.parse(localStorage.getItem('saveLocal') || '[]'))
+
         Promise.all([moviesApi.getMovies(), mainApi.getSaveCards(token)])
             .then(([movieApiCards, { data: localCards }]) => {
-                console.log(localCards)
                 const allCards = movieApiCards.map(card => {
                     const localCard = localCards.find((localCard) => localCard.movieId === card.id);
                     card._id = localCard !== undefined ? localCard._id : '';
@@ -41,14 +30,12 @@ function Movies() {
                     card.saved = localCard !== undefined;
                     return card;
                 });
-                console.log(allCards)
                 setFilms(allCards);
             }).catch((err) => {
                 console.error(err);
                 setIsFailConnect(true);
             });
     }, [])
-
 
 
     function filter(nameRU = '', isShorts) {
@@ -59,11 +46,11 @@ function Movies() {
             }
             return films.nameRU.toLowerCase().includes(nameRU.toLowerCase());
         })
-        if (location.pathname === '/movies') {
-            localStorage.setItem('saveLocal', JSON.stringify(film));
-        }
+
+        localStorage.setItem('saveLocal', JSON.stringify(film));
+        const renderLocalFilms = JSON.parse(localStorage.getItem('saveLocal'));
         setPreloader(false);
-        setRenderedCards(film);
+        setRenderedCards(renderLocalFilms);
         setNoMovies(true);
     }
 
@@ -83,24 +70,22 @@ function Movies() {
             film.nameEN = card.nameEN;
             mainApi.changeLikeCardStatus(film, token)
                 .then((serverCard) => {
-                    setRenderedCards((beatCards) => {
-                        const editedCards = beatCards.map(beatCard => {
-                            if (beatCard.id === serverCard.movieId) {
-                                beatCard.saved = true;
-                                beatCard._id = serverCard._id;
-                                beatCard.movieId = serverCard.movieId;
-                                beatCard.thumbnail = serverCard.thumbnail;
+                    setRenderedCards((cards) => {
+                        const newArrayCards = cards.map(card => {
+                            if (card.id === serverCard.movieId) {
+                                card.saved = true;
+                                card._id = serverCard._id;
+                                card.movieId = serverCard.movieId;
+                                card.thumbnail = serverCard.thumbnail;
                             }
-                            return beatCard;
+                            return card;
                         })
-                        localStorage.setItem('saveLocal', JSON.stringify(editedCards));
-                        return editedCards;
+                        localStorage.setItem('saveLocal', JSON.stringify(newArrayCards));
+                        return newArrayCards;
                     })
-
                 })
                 .catch((err) => {
                     console.error(err);
-
                 });
         }
         else {

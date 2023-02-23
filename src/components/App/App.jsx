@@ -10,8 +10,9 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 import ProtectedRoute from '../HOC/ProtectedRoute';
 
 import { AuthProvider } from '../HOC/AuthProvaider';
+import Preloader from '../Preloader/Preloader';
 export default function App() {
- 
+
   return (
     <AuthProvider>
       <Routes>
@@ -41,6 +42,8 @@ export default function App() {
         <Route path="*" element={<PageNotFound />} />
 
       </Routes>
+      <Preloader />
     </AuthProvider>
+
   );
 }

@@ -1,24 +1,19 @@
 import { createContext, useState, useEffect } from "react";
 import * as mainApi from '../../utils/MainApi';
-import * as constants from '../../constants/constants';
-import { moviesApi } from '../../utils/MoviesApi';
 import { useNavigate, useLocation } from 'react-router-dom';
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-    const token = constants.token;
+    const token = localStorage.getItem('token');
     const [loggedIn, setLoggedIn] = useState(false);
-    const [userData, setUserData] = useState({ _id: '', name: '', email: '' });
-    const [renderedCard, setRenderedCards] = useState([]);
-
-
-
+    const [userData, setUserData] = useState({ name: '', email: '' });
+    const [isLoad, setIsLoad] = useState(true);
     const location = useLocation();
     const history = useNavigate();
 
     const handleRegister = (name, email, password) => {
         return mainApi.register(name, email, password).then(() => {
-            history('/signin');
+            history('/movies');
         }).catch((err) => {
             console.log(`При регистрации произошла ошибка. ${err}`);
         });
@@ -28,37 +23,35 @@ export const AuthProvider = ({ children }) => {
         return mainApi.login(email, password).then((data) => {
             if (!data.token) throw new Error('Нет token');
             localStorage.setItem('token', data.token);
-            checkToken();
             setLoggedIn(true);
-            setUserData({ email, password });
-            history('/');
+            history('/movies');
         }).catch((err) => {
             console.log(`Произошла ошибка. ${err}`);
         });
     }
 
     const checkToken = () => {
-
-        if (!token) return;
+        if (!token) {
+            setIsLoad(false);
+            return
+        };
         if (token) {
-            mainApi.checkTokenValid(token);
             mainApi.getUserInfo(token)
                 .then((user) => {
-                    if (user && user.data) {
-                        setLoggedIn(true);
-                        setUserData(user.data);
-                        history('/movies');
-                    } else {
-                        setLoggedIn(false);
-                        history('/signin');
-                    }
+                    setLoggedIn(true);
+                    setUserData({ name: user.data.name, email: user.data.email });
                 }).catch((err) => {
                     setLoggedIn(false);
                     history('/signin');
                     console.log(err);
-                })
+                }).finally(() => setIsLoad(false))
         }
     }
+
+    useEffect(() => {
+        checkToken();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [loggedIn]);
 
     const handleUpdateUser = (values, app) => {
         const { email, username } = values;
@@ -73,25 +66,12 @@ export const AuthProvider = ({ children }) => {
     };
 
     const signOut = () => {
-        setRenderedCards([])
-        mainApi.checkTokenValid('');
-        setLoggedIn(false);
         localStorage.clear();
-        setUserData({ email: '', password: '' });
-        history('/signin');
-
+        setLoggedIn(false);
+        setUserData({ email: '', name: '' });
     }
 
-
-    useEffect(() => {
-        checkToken();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-
-
-
-    const value = { userData, renderedCard, loggedIn, handleRegister, handleLogin, handleUpdateUser, signOut, location }
+    const value = { userData, loggedIn, handleRegister, handleLogin, handleUpdateUser, signOut, location, isLoad }
 
     return (<AuthContext.Provider value={value}>
         {children}

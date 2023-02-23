@@ -4,13 +4,11 @@ import '../../Movies/MoviesCard/movies-card.css';
 
 function MoviesCard({ film, handleCardLike }) {
     const url = film.image;
-    const hours = `${Math.floor(film.duration / 60) === 0 ? '0' : Math.floor(film.duration / 60)}.${Math.floor(film.duration % 60)}ч.`
+    const hours = `${Math.floor(film.duration / 60) === 0 ? '0' : Math.floor(film.duration / 60)}.${Math.floor(film.duration % 60)}ч.`;
 
     function handleLikeClick() {
         film.saved = true;
-        console.log(film)
         handleCardLike(film);
-
     }
 
     return (

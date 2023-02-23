@@ -6,11 +6,13 @@ import { useAuth } from '../../../hook/useAuth';
 
 function SearchForm({ filter }) {
     const { location } = useAuth();
+
     const [stateInput, setStateInput] = useState('');
     const valueCheckBox = location.pathname === '/movies' && localStorage.getItem('valueCheck') === 'true';
     const valueInput = location.pathname === '/movies' && localStorage.getItem('valueSubmit');
 
     const onSubmit = (values) => {
+
         if (location.pathname === '/movies') {
             localStorage.setItem('valueSubmit', values.filmName);
         }
@@ -20,13 +22,14 @@ function SearchForm({ filter }) {
     }
 
     const handleChange = (values) => {
+
         if (location.pathname === '/movies') {
             localStorage.setItem('valueCheck', values.target.checked);
         }
 
-        if (stateInput.length !== 0) {
-            filter(stateInput, values.target.checked);
-        }
+
+        filter(stateInput, values.target.checked);
+
     }
 
     const CheckBox = ({ children, ...props }) => {

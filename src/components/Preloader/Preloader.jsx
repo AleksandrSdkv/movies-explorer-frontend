@@ -8,11 +8,12 @@
 
 import React from 'react'
 import './Preloader.css'
-
+import { useAuth } from '../../hook/useAuth';
 const Preloader = () => {
+    const { isLoad } = useAuth();
     return (
         <>
-            <svg className="lp" viewBox="0 0 128 128" width="128px" height="128px" xmlns="http://www.w3.org/2000/svg">
+            {isLoad && <svg className="lp" viewBox="0 0 128 128" width="128px" height="128px" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <linearGradient id="grad1" x1="0" y1="0" x2="0" y2="1">
                         <stop offset="0%" stopColor="#000" />
@@ -43,7 +44,7 @@ const Preloader = () => {
                         <circle className="lp__worm" r="56" cx="64" cy="64" transform="rotate(-90,64,64)" />
                     </g>
                 </g>
-            </svg>
+            </svg>}
         </>
 
     )
