@@ -4,13 +4,24 @@ import { Link } from 'react-router-dom';
 import { Formik, Form, } from "formik";
 import SchemaForRegister from '../../validation/validSchema';
 import { useAuth } from '../../hook/useAuth';
-
+import EditRegisterPopup from '../Popup/EditLoginPopup'
+import { useState } from 'react';
 const Register = () => {
     const { handleRegister } = useAuth();
+    const [isPopupOpen, setPopupOpen] = useState('');
+    function popupOpen() {
+        setPopupOpen('popup_opened')
+    }
+    function popupClose() {
+        setPopupOpen('')
+    }
+
     const onSubmit = (values, submitProps) => {
         const { username, email, password } = values;
-        console.log(password)
-        handleRegister(username, email, password)
+        handleRegister(username, email, password).catch((err) => {
+            console.log(`Произошла ошибка. ${err}`);
+            popupOpen();
+        });
         submitProps.resetForm()
     }
     return (
@@ -58,6 +69,10 @@ const Register = () => {
                     </Form>
                 )}
             </Formik>
+            <EditRegisterPopup
+                popupOpen={isPopupOpen}
+                popupClose={popupClose}
+            />
         </main >
     );
 };

@@ -4,15 +4,30 @@ import { Link } from 'react-router-dom';
 import { Formik, Form, } from "formik";
 import { useAuth } from '../../hook/useAuth';
 import { SchemaForLogin } from '../../validation/SchemaForLogin'
+import { useState } from 'react';
+import EditLoginPopup from '../Popup/EditLoginPopup'
 
 function Login() {
     const { handleLogin } = useAuth();
 
+    const [isPopupOpen, setPopupOpen] = useState('');
+
+
+
+    function popupOpen() {
+        setPopupOpen('popup_opened')
+    }
+    function popupClose() {
+        setPopupOpen('')
+    }
 
 
     const onSubmit = (values, submitProps) => {
         const { email, password } = values;
-        handleLogin(email, password);
+        handleLogin(email, password).catch((err) => {
+            console.log(`Произошла ошибка. ${err}`);
+            popupOpen();
+        });
         submitProps.resetForm();
     }
     return (
@@ -52,7 +67,13 @@ function Login() {
                     </Form>
                 )}
             </Formik>
+            <EditLoginPopup
+                popupOpen={isPopupOpen}
+                popupClose={popupClose}
+            />
+           
         </main >
+
     )
 }
 export default Login; 

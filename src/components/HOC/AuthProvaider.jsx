@@ -12,11 +12,13 @@ export const AuthProvider = ({ children }) => {
     const history = useNavigate();
 
     const handleRegister = (name, email, password) => {
-        return mainApi.register(name, email, password).then(() => {
-            history('/movies');
-        }).catch((err) => {
-            console.log(`При регистрации произошла ошибка. ${err}`);
-        });
+        return mainApi.register(name, email, password).then((result) => {
+            if (result && result.data) {
+                handleLogin(email, password)
+            } else {
+                setLoggedIn(false);
+            }
+        })
     }
 
     const handleLogin = (email, password) => {
@@ -25,9 +27,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('token', data.token);
             setLoggedIn(true);
             history('/movies');
-        }).catch((err) => {
-            console.log(`Произошла ошибка. ${err}`);
-        });
+        })
     }
 
     const checkToken = () => {

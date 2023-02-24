@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 
 function Movies() {
     const token = localStorage.getItem('token');
-    const [films, setFilms] = useState([]);
+
     const [renderedCards, setRenderedCards] = useState([]);
     const [preloader, setPreloader] = useState(false);
     const [isFailConnect, setIsFailConnect] = useState(false);
@@ -19,7 +19,10 @@ function Movies() {
     useEffect(() => {
         if (!token) return;
         setRenderedCards(JSON.parse(localStorage.getItem('saveLocal') || '[]'))
+    }, [])
 
+    function filter(nameRU = '', isShorts) {
+        setPreloader(true);
         Promise.all([moviesApi.getMovies(), mainApi.getSaveCards(token)])
             .then(([movieApiCards, { data: localCards }]) => {
                 const allCards = movieApiCards.map(card => {
@@ -30,28 +33,19 @@ function Movies() {
                     card.saved = localCard !== undefined;
                     return card;
                 });
-                setFilms(allCards);
+                const film = allCards.filter((films) => {
+                    if (isShorts) {
+                        return films.duration <= 40 && films.nameRU.toLowerCase().includes(nameRU.toLowerCase());
+                    }
+                    return films.nameRU.toLowerCase().includes(nameRU.toLowerCase());
+                })
+                localStorage.setItem('saveLocal', JSON.stringify(film));
+                setRenderedCards(film);
+                setNoMovies(true);
             }).catch((err) => {
                 console.error(err);
                 setIsFailConnect(true);
-            });
-    }, [])
-
-
-    function filter(nameRU = '', isShorts) {
-        setPreloader(true);
-        const film = films.filter((films) => {
-            if (isShorts) {
-                return films.duration <= 40 && films.nameRU.toLowerCase().includes(nameRU.toLowerCase());
-            }
-            return films.nameRU.toLowerCase().includes(nameRU.toLowerCase());
-        })
-
-        localStorage.setItem('saveLocal', JSON.stringify(film));
-        const renderLocalFilms = JSON.parse(localStorage.getItem('saveLocal'));
-        setPreloader(false);
-        setRenderedCards(renderLocalFilms);
-        setNoMovies(true);
+            }).finally(() => setPreloader(false))
     }
 
     const handleCardLike = (card) => {
@@ -121,7 +115,9 @@ function Movies() {
                 handleCardLike={handleCardLike}
             />
         </main>
-        {preloader && <Preloader />}
+        {<Preloader
+            preloader={preloader}
+        />}
         <Footer />
     </>
     )

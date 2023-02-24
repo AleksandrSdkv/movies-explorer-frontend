@@ -34,7 +34,6 @@ function SavedMovies() {
             }
             return films.nameRU.toLowerCase().includes(nameRU.toLowerCase());
         })
-        console.log(film)
         setFilterCards(film);
     }
 
