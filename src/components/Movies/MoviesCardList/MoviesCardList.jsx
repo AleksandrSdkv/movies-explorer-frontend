@@ -13,7 +13,7 @@ function MoviesCardList({ films, noMovies, isFailConnect, handleCardLike }) {
     };
     useEffect(() => {
         setHiddenShowBtn(displayMovies.init);
-    }, [films, displayMovies.init]);
+    }, []);
     return (
         <>
             {noMovies && films.length === 0 && <p className='more-movie__nothing-search'>Ничего не найдено</p>}
